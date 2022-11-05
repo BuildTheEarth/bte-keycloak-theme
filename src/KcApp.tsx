@@ -3,43 +3,72 @@ import { lazy, Suspense } from "react";
 import type { KcContext } from "./kcContext";
 import KcAppBase, { defaultKcProps } from "keycloakify";
 import { useI18n } from "./i18n";
+import {
+  ColorScheme,
+  ColorSchemeProvider,
+  MantineProvider,
+} from "@mantine/core";
+import { useColorScheme, useLocalStorage } from "@mantine/hooks";
 
 const Register = lazy(() => import("./Register"));
 const Terms = lazy(() => import("./Terms"));
-const MyExtraPage1 = lazy(() => import("./MyExtraPage1"));
-const MyExtraPage2 = lazy(() => import("./MyExtraPage2"));
 
 export type Props = {
-    kcContext: KcContext;
+  kcContext: KcContext;
 };
 
 export default function KcApp({ kcContext }: Props) {
-    const i18n = useI18n({ kcContext });
+  const i18n = useI18n({ kcContext });
 
-    //NOTE: Locales not yet downloaded
-    if (i18n === null) {
-        return null;
-    }
+  const preferredColorScheme = useColorScheme();
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+    key: "color-scheme",
+    defaultValue: preferredColorScheme,
+    getInitialValueInEffect: true,
+  });
 
-    const props = {
-        i18n,
-        ...defaultKcProps,
-        // NOTE: The classes are defined in ./KcApp.css
-        "kcHeaderWrapperClass": "my-color my-font",
-    };
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
-    return (
+  //NOTE: Locales not yet downloaded
+  if (i18n === null) {
+    return null;
+  }
+
+  const props = {
+    i18n,
+    ...defaultKcProps,
+  };
+
+  return (
+    <ColorSchemeProvider
+      colorScheme={colorScheme}
+      toggleColorScheme={toggleColorScheme}
+    >
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          colorScheme,
+          fontFamily: "'Lexend Deca', sans-serif",
+          headings: {
+            fontFamily: "'Lexend Deca', sans-serif",
+          },
+        }}
+      >
         <Suspense>
-            {(() => {
-                switch (kcContext.pageId) {
-                    case "register.ftl": return <Register {...{ kcContext, ...props }} />;
-                    case "terms.ftl": return <Terms {...{ kcContext, ...props }} />;
-                    case "my-extra-page-1.ftl": return <MyExtraPage1 {...{ kcContext, ...props }} />;
-                    case "my-extra-page-2.ftl": return <MyExtraPage2 {...{ kcContext, ...props }} />;
-                    default: return <KcAppBase {...{ kcContext, ...props }} />;
-                }
-            })()}
+          {(() => {
+            switch (kcContext.pageId) {
+              case "register.ftl":
+                return <Register {...{ kcContext, ...props }} />;
+              case "terms.ftl":
+                return <Terms {...{ kcContext, ...props }} />;
+              default:
+                return <KcAppBase {...{ kcContext, ...props }} />;
+            }
+          })()}
         </Suspense>
-    );
-
+      </MantineProvider>
+    </ColorSchemeProvider>
+  );
 }

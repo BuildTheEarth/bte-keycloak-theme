@@ -16,54 +16,257 @@
   -->
   <title>React App</title>
 
-  <link rel="preload" href="%PUBLIC_URL%/fonts/WorkSans/worksans-bold-webfont.woff2" as="font" crossorigin="anonymous">
-  <link rel="preload" href="%PUBLIC_URL%/fonts/WorkSans/worksans-medium-webfont.woff2" as="font" crossorigin="anonymous">
-  <link rel="preload" href="%PUBLIC_URL%/fonts/WorkSans/worksans-regular-webfont.woff2" as="font" crossorigin="anonymous">
-  <link rel="preload" href="%PUBLIC_URL%/fonts/WorkSans/worksans-semibold-webfont.woff2" as="font" crossorigin="anonymous">
   <!-- 
   	We need to put it plain in the html because of Keycloakify, in case we decide to remove --external-assets 
   	SEE: https://github.com/InseeFrLab/keycloakify#font-face-importing-fonts-from-thesrc-dir 
   -->
   <style>
-    /* latin */
+    /* inter-100 - latin */
     @font-face {
-    	font-family: 'Work Sans';
-    	font-style: normal;
-    	font-weight: normal;
-    	/*400*/
-    	font-display: swap;
-    	src: url("%PUBLIC_URL%/fonts/WorkSans/worksans-regular-webfont.woff2") format("woff2");
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-100.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-100.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+, Safari
+    5.1+ */
     }
-  
-    /* latin */
+
+    /* inter-200 - latin */
     @font-face {
-    	font-family: 'Work Sans';
-    	font-style: normal;
-    	font-weight: 500;
-    	font-display: swap;
-    	src: url("%PUBLIC_URL%/fonts/WorkSans/worksans-medium-webfont.woff2") format("woff2");
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 200;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-200.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-200.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+, Safari
+    5.1+ */
     }
-  
-    /* latin */
+
+    /* inter-300 - latin */
     @font-face {
-    	font-family: 'Work Sans';
-    	font-style: normal;
-    	font-weight: 600;
-    	font-display: swap;
-    	src: url("%PUBLIC_URL%/fonts/WorkSans/worksans-semibold-webfont.woff2") format("woff2");
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 300;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-300.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-300.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+, Safari
+    5.1+ */
     }
-  
-    /* latin */
+
+    /* inter-regular - latin */
     @font-face {
-    	font-family: 'Work Sans';
-    	font-style: normal;
-    	font-weight: bold;
-    	/*700*/
-    	font-display: swap;
-    	src: url("%PUBLIC_URL%/fonts/WorkSans/worksans-bold-webfont.woff2") format("woff2");
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-regular.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+
+    */
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-regular.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+,
+    Safari 5.1+ */
+    }
+
+    /* inter-600 - latin */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 600;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-600.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-600.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+, Safari
+    5.1+ */
+    }
+
+    /* inter-500 - latin */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 500;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-500.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-500.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+, Safari
+    5.1+ */
+    }
+
+    /* inter-700 - latin */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-700.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-700.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+, Safari
+    5.1+ */
+    }
+
+    /* inter-800 - latin */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 800;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-800.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-800.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+, Safari
+    5.1+ */
+    }
+
+    /* inter-900 - latin */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 900;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-900.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('%PUBLIC_URL%/fonts/inter/inter-v12-latin-900.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+, Safari
+    5.1+ */
+    }
+
+    /* lexend-deca-100 - latin */
+    @font-face {
+      font-family: 'Lexend Deca';
+      font-style: normal;
+      font-weight: 100;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-100.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox
+    39+ */
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-100.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+,
+    Safari 5.1+ */
+    }
+
+    /* lexend-deca-200 - latin */
+    @font-face {
+      font-family: 'Lexend Deca';
+      font-style: normal;
+      font-weight: 200;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-200.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox
+    39+ */
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-200.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+,
+    Safari 5.1+ */
+    }
+
+    /* lexend-deca-300 - latin */
+    @font-face {
+      font-family: 'Lexend Deca';
+      font-style: normal;
+      font-weight: 300;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-300.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox
+    39+ */
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-300.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+,
+    Safari 5.1+ */
+    }
+
+    /* lexend-deca-regular - latin */
+    @font-face {
+      font-family: 'Lexend Deca';
+      font-style: normal;
+      font-weight: 400;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-regular.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+,
+    Firefox 39+ */
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-regular.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE
+    9+, Safari 5.1+ */
+    }
+
+    /* lexend-deca-600 - latin */
+    @font-face {
+      font-family: 'Lexend Deca';
+      font-style: normal;
+      font-weight: 600;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-600.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox
+    39+ */
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-600.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+,
+    Safari 5.1+ */
+    }
+
+    /* lexend-deca-500 - latin */
+    @font-face {
+      font-family: 'Lexend Deca';
+      font-style: normal;
+      font-weight: 500;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-500.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox
+    39+ */
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-500.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+,
+    Safari 5.1+ */
+    }
+
+    /* lexend-deca-700 - latin */
+    @font-face {
+      font-family: 'Lexend Deca';
+      font-style: normal;
+      font-weight: 700;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-700.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox
+    39+ */
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-700.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+,
+    Safari 5.1+ */
+    }
+
+    /* lexend-deca-800 - latin */
+    @font-face {
+      font-family: 'Lexend Deca';
+      font-style: normal;
+      font-weight: 800;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-800.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox
+    39+ */
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-800.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+,
+    Safari 5.1+ */
+    }
+
+    /* lexend-deca-900 - latin */
+    @font-face {
+      font-family: 'Lexend Deca';
+      font-style: normal;
+      font-weight: 900;
+      src: local(''),
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-900.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox
+    39+ */
+        url('%PUBLIC_URL%/fonts/lexend/lexend-deca-v17-latin-900.woff') format('woff');
+      /* Chrome 6+, Firefox 3.6+, IE 9+,
+    Safari 5.1+ */
     }
   </style>
 
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>

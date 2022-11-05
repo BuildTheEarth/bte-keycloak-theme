@@ -5,162 +5,177 @@
 // See: https://docs.keycloakify.dev/realtime-input-validation
 
 import { memo } from "react";
-import Template from "keycloakify/lib/components/Template";
-import type { KcProps } from "keycloakify";
+import Template, { TemplateProps } from "keycloakify/lib/components/Template";
+import type { KcContextBase, KcProps } from "keycloakify";
 import type { KcContext } from "./kcContext";
 import { clsx } from "keycloakify/lib/tools/clsx";
 import type { I18n } from "./i18n";
+import {
+  TextInput,
+  PasswordInput,
+  Checkbox,
+  Anchor,
+  Paper,
+  Title,
+  Text,
+  Container,
+  Group,
+  Button,
+  Box,
+} from "@mantine/core";
+import Layout from "components/Layout";
+import { useForm } from "@mantine/form";
+import ReCAPTCHA from "react-google-recaptcha";
 
-type KcContext_Register = Extract<KcContext, { pageId: "register.ftl"; }>;
+type KcContext_Register = Extract<KcContext, { pageId: "register.ftl" }>;
 
-const Register = memo(({ kcContext, i18n, ...props }: { kcContext: KcContext_Register; i18n: I18n; } & KcProps) => {
-    const { url, messagesPerField, register, realm, passwordRequired, recaptchaRequired, recaptchaSiteKey } = kcContext;
+export type RegisterProps = KcProps & {
+  kcContext: KcContextBase.Register;
+  i18n: I18n;
+  doFetchDefaultThemeResources?: boolean;
+};
 
-    const { msg, msgStr } = i18n;
+const Register = memo((props: RegisterProps) => {
+  const {
+    kcContext,
+    i18n,
+    doFetchDefaultThemeResources = true,
+    ...kcProps
+  } = props;
+  const {
+    url,
+    messagesPerField,
+    register,
+    realm,
+    passwordRequired,
+    recaptchaRequired,
+    recaptchaSiteKey,
+  } = kcContext;
 
-	console.log(`NOTE: It is up to you do do something meaningful with ${kcContext.authorizedMailDomains}`)
+  const { msg, msgStr } = i18n;
 
-    return (
-        <Template
-            {...{ kcContext, i18n, ...props }}
-            doFetchDefaultThemeResources={true}
-            headerNode={msg("registerTitle")}
-            formNode={
-                <form id="kc-register-form" className={clsx(props.kcFormClass)} action={url.registrationAction} method="post">
-                    <div className={clsx(props.kcFormGroupClass, messagesPerField.printIfExists("firstName", props.kcFormGroupErrorClass))}>
-                        <div className={clsx(props.kcLabelWrapperClass)}>
-                            <label htmlFor="firstName" className={clsx(props.kcLabelClass)}>
-                                {msg("firstName")}
-                            </label>
-                        </div>
-                        <div className={clsx(props.kcInputWrapperClass)}>
-                            <input
-                                type="text"
-                                id="firstName"
-                                className={clsx(props.kcInputClass)}
-                                name="firstName"
-                                defaultValue={register.formData.firstName ?? ""}
-                            />
-                        </div>
-                    </div>
+  const form = useForm({
+    initialValues: {
+      email: register.formData.email ?? "",
+      username: register.formData.username ?? "",
+      password: "",
+      "password-confirm": "",
+    },
 
-                    <div className={clsx(props.kcFormGroupClass, messagesPerField.printIfExists("lastName", props.kcFormGroupErrorClass))}>
-                        <div className={clsx(props.kcLabelWrapperClass)}>
-                            <label htmlFor="lastName" className={clsx(props.kcLabelClass)}>
-                                {msg("lastName")}
-                            </label>
-                        </div>
-                        <div className={clsx(props.kcInputWrapperClass)}>
-                            <input
-                                type="text"
-                                id="lastName"
-                                className={clsx(props.kcInputClass)}
-                                name="lastName"
-                                defaultValue={register.formData.lastName ?? ""}
-                            />
-                        </div>
-                    </div>
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+      "password-confirm": (value, { password }) => {
+        if (value !== password) {
+          return "Passwords do not match";
+        }
+      },
+    },
+  });
 
-                    <div className={clsx(props.kcFormGroupClass, messagesPerField.printIfExists("email", props.kcFormGroupErrorClass))}>
-                        <div className={clsx(props.kcLabelWrapperClass)}>
-                            <label htmlFor="email" className={clsx(props.kcLabelClass)}>
-                                {msg("email")}
-                            </label>
-                        </div>
-                        <div className={clsx(props.kcInputWrapperClass)}>
-                            <input
-                                type="text"
-                                id="email"
-                                className={clsx(props.kcInputClass)}
-                                name="email"
-                                defaultValue={register.formData.email ?? ""}
-                                autoComplete="email"
-                            />
-                        </div>
-                    </div>
-                    {!realm.registrationEmailAsUsername && (
-                        <div className={clsx(props.kcFormGroupClass, messagesPerField.printIfExists("username", props.kcFormGroupErrorClass))}>
-                            <div className={clsx(props.kcLabelWrapperClass)}>
-                                <label htmlFor="username" className={clsx(props.kcLabelClass)}>
-                                    {msg("username")}
-                                </label>
-                            </div>
-                            <div className={clsx(props.kcInputWrapperClass)}>
-                                <input
-                                    type="text"
-                                    id="username"
-                                    className={clsx(props.kcInputClass)}
-                                    name="username"
-                                    defaultValue={register.formData.username ?? ""}
-                                    autoComplete="username"
-                                />
-                            </div>
-                        </div>
-                    )}
-                    {passwordRequired && (
-                        <>
-                            <div className={clsx(props.kcFormGroupClass, messagesPerField.printIfExists("password", props.kcFormGroupErrorClass))}>
-                                <div className={clsx(props.kcLabelWrapperClass)}>
-                                    <label htmlFor="password" className={clsx(props.kcLabelClass)}>
-                                        {msg("password")}
-                                    </label>
-                                </div>
-                                <div className={clsx(props.kcInputWrapperClass)}>
-                                    <input
-                                        type="password"
-                                        id="password"
-                                        className={clsx(props.kcInputClass)}
-                                        name="password"
-                                        autoComplete="new-password"
-                                    />
-                                </div>
-                            </div>
+  return (
+    <Layout {...{ kcContext, i18n, doFetchDefaultThemeResources, ...kcProps }}>
+      <Container
+        sx={{
+          flex: 1,
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          height: "100%",
+        }}
+        size="xs"
+      >
+        <div>
+          <Title color={"light"} sx={{ fontWeight: 700 }}>
+            {msg("registerTitle")}
+          </Title>
 
-                            <div
-                                className={clsx(
-                                    props.kcFormGroupClass,
-                                    messagesPerField.printIfExists("password-confirm", props.kcFormGroupErrorClass)
-                                )}
-                            >
-                                <div className={clsx(props.kcLabelWrapperClass)}>
-                                    <label htmlFor="password-confirm" className={clsx(props.kcLabelClass)}>
-                                        {msg("passwordConfirm")}
-                                    </label>
-                                </div>
-                                <div className={clsx(props.kcInputWrapperClass)}>
-                                    <input type="password" id="password-confirm" className={clsx(props.kcInputClass)} name="password-confirm" />
-                                </div>
-                            </div>
-                        </>
-                    )}
-                    {recaptchaRequired && (
-                        <div className="form-group">
-                            <div className={clsx(props.kcInputWrapperClass)}>
-                                <div className="g-recaptcha" data-size="compact" data-sitekey={recaptchaSiteKey}></div>
-                            </div>
-                        </div>
-                    )}
-                    <div className={clsx(props.kcFormGroupClass)}>
-                        <div id="kc-form-options" className={clsx(props.kcFormOptionsClass)}>
-                            <div className={clsx(props.kcFormOptionsWrapperClass)}>
-                                <span>
-                                    <a href={url.loginUrl}>{msg("backToLogin")}</a>
-                                </span>
-                            </div>
-                        </div>
+          <Text color="dimmed" size="sm" mt={5} mb="xl">
+            {msg("registerText")}
+          </Text>
 
-                        <div id="kc-form-buttons" className={clsx(props.kcFormButtonsClass)}>
-                            <input
-                                className={clsx(props.kcButtonClass, props.kcButtonPrimaryClass, props.kcButtonBlockClass, props.kcButtonLargeClass)}
-                                type="submit"
-                                value={msgStr("doRegister")}
-                            />
-                        </div>
-                    </div>
-                </form>
-            }
-        />
-    );
+          <form
+            action={url.registrationAction}
+            method="post"
+            onSubmit={(event) => {
+              if (!form.isValid()) {
+                form.validate();
+                event.preventDefault();
+              }
+            }}
+          >
+            <input
+              type="text"
+              id="firstName"
+              value={"a"}
+              style={{ display: "none" }}
+            />
+
+            <input
+              type="text"
+              id="lastName"
+              value={"b"}
+              style={{ display: "none" }}
+            />
+            {!realm.registrationEmailAsUsername && (
+              <TextInput
+                label={msg("username")}
+                autoComplete="username"
+                required
+                name="username"
+                {...form.getInputProps("username")}
+              />
+            )}
+
+            <TextInput
+              label={msg("email")}
+              required
+              mt="md"
+              name="email"
+              {...form.getInputProps("email")}
+            />
+
+            {passwordRequired && (
+              <>
+                <PasswordInput
+                  label={msg("password")}
+                  placeholder=""
+                  required
+                  mt="md"
+                  name="password"
+                  {...form.getInputProps("password")}
+                />
+                <PasswordInput
+                  label={msg("passwordConfirm")}
+                  placeholder=""
+                  required
+                  mt="md"
+                  name="password-confirm"
+                  {...form.getInputProps("password-confirm")}
+                />
+              </>
+            )}
+
+            {recaptchaRequired && (
+              <ReCAPTCHA
+                sitekey={recaptchaSiteKey || ""}
+                onChange={(value) => console.log(value)}
+              />
+            )}
+
+            <Button fullWidth mt="xl" color={"white"} type="submit">
+              {msgStr("doRegister")}
+            </Button>
+
+            <Box mt="xl" sx={{ display: "flex", justifyContent: "center" }}>
+              <Anchor href={url.loginUrl} color="white" size={"sm"}>
+                {msgStr("backToLogin")}
+              </Anchor>
+            </Box>
+          </form>
+        </div>
+      </Container>
+    </Layout>
+  );
 });
 
 export default Register;
