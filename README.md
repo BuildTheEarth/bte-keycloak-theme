@@ -1,3 +1,4 @@
+
 <p align="center">
     <img src="https://github.com/garronej/keycloakify-advanced-starter/workflows/ci/badge.svg?branch=main">
 </p>
