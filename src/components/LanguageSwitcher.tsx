@@ -7,6 +7,7 @@ import {
   Group,
 } from "@mantine/core";
 import { IconChevronDown } from "@tabler/icons";
+import {KcContextBase} from "keycloakify";
 
 const useStyles = createStyles((theme, { opened }: { opened: boolean }) => ({
   control: {
@@ -51,19 +52,20 @@ export function LanguageSwitcher({
   kcContext,
 }: {
   i18n: any;
-  kcContext: any;
+  kcContext: KcContextBase;
 }) {
   const { msg, changeLocale, labelBySupportedLanguageTag, currentLanguageTag } =
     i18n;
   const { realm, locale, auth, url, message, isAppInitiatedAction } = kcContext;
   const [opened, setOpened] = useState(false);
   const { classes } = useStyles({ opened });
-  const items = locale.supported.map(
+
+  const items = locale?.supported.map(
     ({ languageTag }: { languageTag: string }) => (
       <Menu.Item
         icon={
           <Image
-            src={"/flags/" + languageTag + ".svg"}
+            src={url.resourcesPath + "/flags/" + languageTag + ".svg"}
             width={18}
             height={18}
             radius="xl"
@@ -88,7 +90,7 @@ export function LanguageSwitcher({
         <UnstyledButton className={classes.control}>
           <Group spacing="xs">
             <Image
-              src={"/flags/" + currentLanguageTag + ".svg"}
+              src={url.resourcesPath + "/flags/" + currentLanguageTag + ".svg"}
               width={22}
               height={22}
               radius="xl"

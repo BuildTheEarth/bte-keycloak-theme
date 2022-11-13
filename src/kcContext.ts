@@ -1,32 +1,98 @@
 import { getKcContext } from "keycloakify/lib/getKcContext";
 
-export const { kcContext } =
-  getKcContext<// NOTE: register.ftl is deprecated in favor of register-user-profile.ftl
-  // but let's say we use it anyway and have this plugin enabled: https://github.com/micedre/keycloak-mail-whitelisting
-  // keycloak-mail-whitelisting define the non standard ftl global authorizedMailDomains, we declare it here.
-  { pageId: "register.ftl"; authorizedMailDomains: string[] }>({
-    // Uncomment to test the login page for development.
-    mockPageId: "register.ftl",
-    mockData: [
-      {
-        pageId: "login.ftl",
-        locale: {
-          //When we test the login page we do it in french
-          currentLanguageTag: "en",
-        },
+export const { kcContext } = getKcContext<{
+  pageId: "register.ftl";
+  authorizedMailDomains: string[];
+}>({
+  mockPageId: "login-otp.ftl",
+  mockData: [
+    {
+      pageId: "terms.ftl",
+      realm: {
+        displayNameHtml:
+          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayName: "Build the Earth",
       },
-      {
-        //NOTE: You will either use register.ftl (legacy) or register-user-profile.ftl, not both
-        pageId: "register.ftl",
-        realm: {
-          displayNameHtml:
-            "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
-          displayName: "Build the Earth",
-        },
-        recaptchaRequired: true,
-        recaptchaSiteKey: "6Ldfnt0iAAAAACDXEj3_nf_fwpUl3MA9OuTjiMDA",
+    },
+    {
+      pageId: "login-otp.ftl",
+      realm: {
+        displayNameHtml:
+          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayName: "Build the Earth",
       },
-    ],
-  });
+    },
+    {
+      pageId: "error.ftl",
+      realm: {
+        displayNameHtml:
+          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayName: "Build the Earth",
+      },
+    },
+    {
+      pageId: "webauthn-authenticate.ftl",
+      realm: {
+        displayNameHtml:
+          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayName: "Build the Earth",
+      },
+      message: {
+        type: "error",
+      },
+      auth: {
+        showTryAnotherWayLink: true,
+        showUsername: true,
+        attemptedUsername: "Nachwahl",
+      },
+      authenticators: {
+        authenticators: [
+          {
+            label: "WebAuthn",
+            createdAt: "2021-03-01T00:00:00.000Z",
+            credentialId: "credentialId",
+          },
+        ],
+      },
+    },
+    {
+      pageId: "login.ftl",
+      realm: {
+        displayNameHtml:
+          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayName: "Build the Earth",
+      },
+      social: {
+        providers: [
+          {
+            alias: "discord",
+            displayName: "Discord",
+          },
+          {
+            alias: "google",
+            displayName: "Google",
+          },
+          {
+            alias: "apple",
+            displayName: "Apple",
+          },
+        ],
+      },
+      locale: {
+        currentLanguageTag: "en",
+      },
+    },
+    {
+      pageId: "register.ftl",
+      realm: {
+        displayNameHtml:
+          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayName: "Build the Earth",
+      },
+      recaptchaRequired: true,
+      recaptchaSiteKey: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
+    },
+  ],
+});
 
 export type KcContext = NonNullable<typeof kcContext>;
