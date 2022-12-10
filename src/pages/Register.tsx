@@ -1,4 +1,3 @@
-
 import { memo, useEffect } from "react";
 import Template, { TemplateProps } from "keycloakify/lib/components/Template";
 import type { KcContextBase, KcProps } from "keycloakify";
@@ -68,9 +67,7 @@ const Register = memo((props: RegisterProps) => {
   });
 
   useEffect(() => {
-
-    if (!recaptchaRequired)
-      return;
+    if (!recaptchaRequired) return;
 
     try {
       //@ts-ignore
@@ -181,7 +178,7 @@ const Register = memo((props: RegisterProps) => {
 
             <Box mt="xl" sx={{ display: "flex", justifyContent: "center" }}>
               <Anchor href={url.loginUrl} color="white" size={"sm"}>
-                {msgStr("backToLogin")}
+                {msgStr("registerBackToLogin")}
               </Anchor>
             </Box>
           </form>

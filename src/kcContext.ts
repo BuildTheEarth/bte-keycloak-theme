@@ -4,8 +4,32 @@ export const { kcContext } = getKcContext<{
   pageId: "register.ftl";
   authorizedMailDomains: string[];
 }>({
-  mockPageId: "login-otp.ftl",
+  mockPageId: "login-page-expired.ftl",
   mockData: [
+    {
+      pageId: "login-page-expired.ftl",
+      realm: {
+        displayNameHtml:
+          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayName: "Build the Earth",
+      },
+    },
+    {
+      pageId: "login-verify-email.ftl",
+      realm: {
+        displayNameHtml:
+          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayName: "Build the Earth",
+      },
+    },
+    {
+      pageId: "login-reset-password.ftl",
+      realm: {
+        displayNameHtml:
+          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayName: "Build the Earth",
+      },
+    },
     {
       pageId: "terms.ftl",
       realm: {
@@ -20,6 +44,11 @@ export const { kcContext } = getKcContext<{
         displayNameHtml:
           "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
         displayName: "Build the Earth",
+      },
+      auth: {
+        showTryAnotherWayLink: true,
+        showUsername: true,
+        attemptedUsername: "Nachwahl",
       },
     },
     {

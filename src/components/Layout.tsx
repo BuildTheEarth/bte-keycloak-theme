@@ -51,6 +51,7 @@ export type TemplateProps = {
     showUsernameNode?: ReactNode;
     infoNode?: ReactNode;
     doFetchDefaultThemeResources: boolean;
+    hideLoggedIn?: boolean;
 } & { kcContext: KcContextBase; i18n: I18n } & KcTemplateProps &
     PropsWithChildren<{}>;
 
@@ -64,6 +65,7 @@ export default function Layout(props: TemplateProps) {
         showAnotherWayIfPresent = true,
         showUsernameNode = null,
         infoNode = null,
+        hideLoggedIn = false,
         kcContext,
         i18n,
         doFetchDefaultThemeResources,
@@ -145,7 +147,7 @@ export default function Layout(props: TemplateProps) {
 
 
                     {
-                        auth?.showUsername &&
+                        (auth?.showUsername && !hideLoggedIn) &&
                         <Text color={"dimmed"}>{msg("attemptedUsernameGreeting", auth?.attemptedUsername)} <Anchor
                             href={url.loginRestartFlowUrl}>{msg("notYou")}</Anchor></Text>
                     }

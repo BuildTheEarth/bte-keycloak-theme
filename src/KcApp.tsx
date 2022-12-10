@@ -13,6 +13,9 @@ import { NotificationsProvider } from "@mantine/notifications";
 import Error from "./pages/Error";
 import Info from "pages/Info";
 import LoginOtp from "pages/LoginOtp";
+import LoginResetPassword from "./pages/LoginResetPassword";
+import LoginVerifyEmail from "pages/LoginVerifyEmail";
+import LoginPageExpired from "pages/LoginPageExpired";
 
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
@@ -80,6 +83,12 @@ export default function KcApp({ kcContext }: Props) {
                   return <Info {...{ kcContext, ...props }} />;
                 case "login-otp.ftl":
                   return <LoginOtp {...{ kcContext, ...props }} />;
+                case "login-reset-password.ftl":
+                  return <LoginResetPassword {...{ kcContext, ...props }} />;
+                case "login-verify-email.ftl":
+                  return <LoginVerifyEmail {...{ kcContext, ...props }} />;
+                case "login-page-expired.ftl":
+                  return <LoginPageExpired {...{ kcContext, ...props }} />;
                 default:
                   return <KcAppBase {...{ kcContext, ...props }} />;
               }

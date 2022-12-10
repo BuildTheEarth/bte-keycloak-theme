@@ -1,7 +1,6 @@
 // Modified version of https://github.com/drac94/react-auth-code-input, adds Mantine input
 
 import { Group, Input } from "@mantine/core";
-import { log } from "console";
 import React, {
   useRef,
   useEffect,
@@ -131,12 +130,12 @@ const AuthCode = forwardRef<AuthCodeRef, AuthCodeProps>(
 
       if (value.length > 1) {
         e.target.value = value.charAt(0);
-        if (nextElementSibling !== null) {
+        if (nextElementSibling as HTMLInputElement) {
           (nextElementSibling as HTMLInputElement).focus();
         }
       } else {
         if (value.match(inputProps.pattern)) {
-          if (nextElementSibling !== null) {
+          if (nextElementSibling as HTMLInputElement) {
             (nextElementSibling as HTMLInputElement).focus();
           }
         } else {
@@ -154,7 +153,7 @@ const AuthCode = forwardRef<AuthCodeRef, AuthCodeProps>(
       const target = e.target as HTMLInputElement;
       if (key === "Backspace") {
         if (target.value === "") {
-          if (inputsRef.current[i - 1] !== null) {
+          if (inputsRef.current[i - 1] as HTMLInputElement) {
             const t = inputsRef.current[i - 1] as HTMLInputElement;
             t.value = "";
             t.focus();
@@ -199,10 +198,6 @@ const AuthCode = forwardRef<AuthCodeRef, AuthCodeProps>(
 
       e.preventDefault();
     };
-
-    useEffect(() => {
-      console.log(inputsRef);
-    }, [inputsRef]);
 
     const inputs = [];
     for (let i = 0; i < length; i++) {
