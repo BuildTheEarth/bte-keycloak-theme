@@ -7,24 +7,16 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { IconClock } from "@tabler/icons";
-import Layout from "components/Layout";
-import { KcContextBase, KcProps } from "keycloakify";
-import React, { memo } from "react";
+import Layout from "../components/Layout";
+import { PageProps } from "keycloakify/login";
+import { KcContext } from "login/kcContext";
+import React from "react";
 import type { I18n } from "../i18n";
 
-export type LoginPageExpired = KcProps & {
-  kcContext: KcContextBase.LoginPageExpired;
-  i18n: I18n;
-  doFetchDefaultThemeResources?: boolean;
-};
 
-const LoginPageExpired = memo((props: LoginPageExpired) => {
-  const {
-    kcContext,
-    i18n,
-    doFetchDefaultThemeResources = true,
-    ...kcProps
-  } = props;
+export default function LoginPageExpired(props: PageProps<Extract<KcContext, { pageId: "login-page-expired.ftl" }>, I18n>) {
+    const { kcContext, i18n, doUseDefaultCss, classes } = props;
+
 
   const { url } = kcContext;
 
@@ -33,7 +25,7 @@ const LoginPageExpired = memo((props: LoginPageExpired) => {
   const theme = useMantineTheme();
 
   return (
-    <Layout {...{ kcContext, i18n, doFetchDefaultThemeResources, ...kcProps }}>
+    <Layout {...{ kcContext, i18n, doUseDefaultCss, classes }}>
       <Container
         sx={{
           flex: 1,
@@ -72,6 +64,4 @@ const LoginPageExpired = memo((props: LoginPageExpired) => {
       </Container>
     </Layout>
   );
-});
-
-export default LoginPageExpired;
+}

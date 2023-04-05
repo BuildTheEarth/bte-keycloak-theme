@@ -1,23 +1,14 @@
-import React, { memo } from "react";
+import React from "react";
 import type { I18n } from "../i18n";
-import { KcContextBase, KcProps } from "keycloakify";
 import Layout from "../components/Layout";
+import { PageProps } from "keycloakify/login";
+import { KcContext } from "login/kcContext";
 import { Container, TextInput, Title, Text, Button } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-export type LoginResetPasswordProps = KcProps & {
-  kcContext: KcContextBase.LoginResetPassword;
-  i18n: I18n;
-  doFetchDefaultThemeResources?: boolean;
-};
 
-const LoginResetPassword = memo((props: LoginResetPasswordProps) => {
-  const {
-    kcContext,
-    i18n,
-    doFetchDefaultThemeResources = true,
-    ...kcProps
-  } = props;
+export default function LoginResetPassword(props: PageProps<Extract<KcContext, { pageId: "login-reset-password.ftl" }>, I18n>) {
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
   const { url, realm, auth } = kcContext;
 
@@ -40,7 +31,7 @@ const LoginResetPassword = memo((props: LoginResetPasswordProps) => {
   });
 
   return (
-    <Layout {...{ kcContext, i18n, doFetchDefaultThemeResources, ...kcProps }}>
+    <Layout {...{ kcContext, i18n, doUseDefaultCss, classes }}>
       <Container
         sx={{
           flex: 1,
@@ -96,6 +87,4 @@ const LoginResetPassword = memo((props: LoginResetPasswordProps) => {
       </Container>
     </Layout>
   );
-});
-
-export default LoginResetPassword;
+}

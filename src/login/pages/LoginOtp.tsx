@@ -1,23 +1,13 @@
 import {Group, Input, Title, Text, Button, Container, Anchor} from "@mantine/core";
-import AuthCode from "components/AuthCode";
-import Layout from "components/Layout";
-import {KcContextBase, KcProps} from "keycloakify";
 import React, {useEffect, memo, useState} from "react";
 import type {I18n} from "../i18n";
+import { PageProps } from "keycloakify/login";
+import { KcContext } from "login/kcContext";
+import Layout from "../components/Layout";
+import AuthCode from "login/components/AuthCode";
 
-export type LoginOtpProps = KcProps & {
-    kcContext: KcContextBase.LoginOtp;
-    i18n: I18n;
-    doFetchDefaultThemeResources?: boolean;
-};
-
-const LoginOtp = memo((props: LoginOtpProps) => {
-    const {
-        kcContext,
-        i18n,
-        doFetchDefaultThemeResources = true,
-        ...kcProps
-    } = props;
+export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "login-otp.ftl" }>, I18n>) {
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
     const {otpLogin, url, auth} = kcContext;
 
@@ -29,7 +19,7 @@ const LoginOtp = memo((props: LoginOtpProps) => {
     };
 
     return (
-        <Layout hideLoggedIn={true} {...{kcContext, i18n, doFetchDefaultThemeResources, ...kcProps}}>
+        <Layout hideLoggedIn={true}  {...{ kcContext, i18n, doUseDefaultCss, classes }}>
             <Container
                 sx={{
                     flex: 1,
@@ -58,6 +48,4 @@ const LoginOtp = memo((props: LoginOtpProps) => {
 
         </Layout>
     );
-});
-
-export default LoginOtp;
+}

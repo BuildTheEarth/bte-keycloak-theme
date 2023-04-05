@@ -7,7 +7,7 @@ import {
   Group,
 } from "@mantine/core";
 import { IconChevronDown } from "@tabler/icons";
-import {KcContextBase} from "keycloakify";
+import { KcContext } from "login/kcContext";
 
 const useStyles = createStyles((theme, { opened }: { opened: boolean }) => ({
   control: {
@@ -52,7 +52,7 @@ export function LanguageSwitcher({
   kcContext,
 }: {
   i18n: any;
-  kcContext: KcContextBase;
+  kcContext: KcContext;
 }) {
   const { msg, changeLocale, labelBySupportedLanguageTag, currentLanguageTag } =
     i18n;

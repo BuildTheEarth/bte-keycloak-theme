@@ -7,24 +7,15 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { IconMailbox } from "@tabler/icons";
-import Layout from "components/Layout";
-import { KcContextBase, KcProps } from "keycloakify";
+import Layout from "../components/Layout";
+import { PageProps } from "keycloakify/login";
+import { KcContext } from "login/kcContext";
 import React, { memo } from "react";
 import type { I18n } from "../i18n";
 
-export type LoginVerifyEmailProps = KcProps & {
-  kcContext: KcContextBase.LoginVerifyEmail;
-  i18n: I18n;
-  doFetchDefaultThemeResources?: boolean;
-};
 
-const LoginVerifyEmail = memo((props: LoginVerifyEmailProps) => {
-  const {
-    kcContext,
-    i18n,
-    doFetchDefaultThemeResources = true,
-    ...kcProps
-  } = props;
+export default function LoginVerifyEmail(props: PageProps<Extract<KcContext, { pageId: "login-verify-email.ftl" }>, I18n>) {
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
   const { msg } = i18n;
 
@@ -33,7 +24,7 @@ const LoginVerifyEmail = memo((props: LoginVerifyEmailProps) => {
   const theme = useMantineTheme();
 
   return (
-    <Layout {...{ kcContext, i18n, doFetchDefaultThemeResources, ...kcProps }}>
+    <Layout {...{ kcContext, i18n, doUseDefaultCss, classes }}>
       <Container
         sx={{
           flex: 1,
@@ -69,6 +60,4 @@ const LoginVerifyEmail = memo((props: LoginVerifyEmailProps) => {
       </Container>
     </Layout>
   );
-});
-
-export default LoginVerifyEmail;
+}

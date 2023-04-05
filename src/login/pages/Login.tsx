@@ -5,10 +5,7 @@
 // See: https://docs.keycloakify.dev/realtime-input-validation
 
 import { memo, useEffect } from "react";
-import Template, { TemplateProps } from "keycloakify/lib/components/Template";
-import type { KcContextBase, KcProps } from "keycloakify";
 import type { KcContext } from "../kcContext";
-import { clsx } from "keycloakify/lib/tools/clsx";
 import type { I18n } from "../i18n";
 import {
   TextInput,
@@ -26,7 +23,6 @@ import {
   Flex,
   SimpleGrid,
 } from "@mantine/core";
-import Layout from "components/Layout";
 import { useForm } from "@mantine/form";
 import {
   IconBox,
@@ -34,22 +30,12 @@ import {
   IconBrandDiscord,
   IconBrandGoogle,
 } from "@tabler/icons";
+import { PageProps } from "keycloakify/login";
+import Layout from "login/components/Layout";
 
-type KcContext_Login = Extract<KcContext, { pageId: "login.ftl" }>;
 
-export type LoginProps = KcProps & {
-  kcContext: KcContextBase.Login;
-  i18n: I18n;
-  doFetchDefaultThemeResources?: boolean;
-};
-
-const Login = memo((props: LoginProps) => {
-  const {
-    kcContext,
-    i18n,
-    doFetchDefaultThemeResources = true,
-    ...kcProps
-  } = props;
+export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
   const {
     social,
@@ -79,7 +65,7 @@ const Login = memo((props: LoginProps) => {
   };
 
   return (
-    <Layout {...{ kcContext, i18n, doFetchDefaultThemeResources, ...kcProps }}>
+    <Layout {...{ kcContext, i18n, doUseDefaultCss, classes }}>
       <Container
         sx={{
           flex: 1,
@@ -201,6 +187,4 @@ const Login = memo((props: LoginProps) => {
       </Container>
     </Layout>
   );
-});
-
-export default Login;
+}

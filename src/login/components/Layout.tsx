@@ -16,7 +16,6 @@ import {
     IconInfoCircle, IconX,
 } from "@tabler/icons";
 import {from} from "evt/lib/Evt.from";
-import {KcContextBase, KcTemplateProps} from "keycloakify";
 import React, {
     PropsWithChildren,
     ReactComponentElement,
@@ -26,6 +25,8 @@ import {LanguageSwitcher} from "./LanguageSwitcher";
 import {ThemeSwitchButton} from "./ThemeSwitchButton";
 import {I18n} from "../i18n";
 import {showNotification} from "@mantine/notifications";
+import type { KcContext } from "../kcContext";
+import { TemplateProps } from "../TemplateProps";
 
 const useStyles = createStyles((theme) => ({
     loginSidebar: {
@@ -42,20 +43,9 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-export type TemplateProps = {
-    displayInfo?: boolean;
-    displayMessage?: boolean;
-    displayRequiredFields?: boolean;
-    displayWide?: boolean;
-    showAnotherWayIfPresent?: boolean;
-    showUsernameNode?: ReactNode;
-    infoNode?: ReactNode;
-    doFetchDefaultThemeResources: boolean;
-    hideLoggedIn?: boolean;
-} & { kcContext: KcContextBase; i18n: I18n } & KcTemplateProps &
-    PropsWithChildren<{}>;
 
-export default function Layout(props: TemplateProps) {
+
+export default function Layout(props: TemplateProps<KcContext, I18n>) {
     const {classes} = useStyles();
     const {
         displayInfo = false,
@@ -68,8 +58,8 @@ export default function Layout(props: TemplateProps) {
         hideLoggedIn = false,
         kcContext,
         i18n,
-        doFetchDefaultThemeResources,
-        children,
+        doUseDefaultCss,
+        children
     } = props;
 
     const {msg, changeLocale, labelBySupportedLanguageTag, currentLanguageTag, msgStr} =

@@ -1,23 +1,13 @@
 import React, { memo } from "react";
 import type { I18n } from "../i18n";
 import Layout from "../components/Layout";
-import { KcContextBase, KcProps } from "keycloakify";
 import { Alert, Button, Title, useMantineTheme } from "@mantine/core";
 import { IconAlertOctagon, IconAlertTriangle } from "@tabler/icons";
+import { PageProps } from "keycloakify/login";
+import { KcContext } from "login/kcContext";
 
-export type ErrorProps = KcProps & {
-  kcContext: KcContextBase.Error;
-  i18n: I18n;
-  doFetchDefaultThemeResources?: boolean;
-};
-
-const Error = memo((props: ErrorProps) => {
-  const {
-    kcContext,
-    i18n,
-    doFetchDefaultThemeResources = true,
-    ...kcProps
-  } = props;
+export default function Error(props: PageProps<Extract<KcContext, { pageId: "error.ftl" }>, I18n>) {
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
   const { message, client } = kcContext;
 
@@ -27,7 +17,7 @@ const Error = memo((props: ErrorProps) => {
 
   return (
     <Layout
-      {...{ kcContext, i18n, doFetchDefaultThemeResources, ...kcProps }}
+      {...{ kcContext, i18n, doUseDefaultCss, classes }}
       displayMessage={false}
     >
       <Title
@@ -54,6 +44,4 @@ const Error = memo((props: ErrorProps) => {
       )}
     </Layout>
   );
-});
-
-export default Error;
+}

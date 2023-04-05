@@ -1,15 +1,13 @@
-import { memo } from "react";
-import Template from "keycloakify/lib/components/Template";
-import type { KcProps } from "keycloakify";
-import { useDownloadTerms } from "keycloakify";
+import {
+    evtTermMarkdown,
+    useDownloadTerms
+} from "keycloakify/login/lib/useDownloadTerms";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
-import { evtTermMarkdown } from "keycloakify/lib/components/Terms";
 import { useRerenderOnStateChange } from "evt/hooks";
 import tos_en_url from "../terms/tos_en.md";
 import tos_fr_url from "../terms/tos_fr.md";
-import { clsx } from "keycloakify/lib/tools/clsx";
-import Layout from "components/Layout";
+
 import {
   Box,
   Button,
@@ -20,23 +18,16 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import ReactMarkdown from "react-markdown";
+import { PageProps } from "keycloakify/login";
+import Layout from "login/components/Layout";
 
-/**
- * NOTE: Yo do not need to do all this to put your own Terms and conditions
- * this is if you want component level customization.
- * If the default works for you you can just use the useDownloadTerms hook
- * in the KcApp.tsx
- * Example: https://github.com/garronej/keycloakify-starter/blob/a20c21b2aae7c6dc6dbea294f3d321955ddf9355/src/KcApp/KcApp.tsx#L14-L30
- */
 
 type KcContext_Terms = Extract<KcContext, { pageId: "terms.ftl" }>;
 
-const Terms = memo(
-  ({
-    kcContext,
-    i18n,
-    ...props
-  }: { kcContext: KcContext_Terms; i18n: I18n } & KcProps) => {
+export default function Terms(props: PageProps<Extract<KcContext, { pageId: "terms.ftl" }>, I18n>) {
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+
+
     const { url } = kcContext;
     const { colorScheme } = useMantineColorScheme();
     const dark = colorScheme === "dark";
@@ -68,10 +59,7 @@ const Terms = memo(
     const { msg, msgStr } = i18n;
 
     return (
-      <Layout
-        {...{ kcContext, i18n, ...props }}
-        doFetchDefaultThemeResources={false}
-      >
+      <Layout {...{ kcContext, i18n, doUseDefaultCss, classes }}>
         <Box
           sx={{
             display: "flex",
@@ -140,6 +128,3 @@ const Terms = memo(
       </Layout>
     );
   }
-);
-
-export default Terms;

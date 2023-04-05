@@ -1,23 +1,15 @@
 import React, { memo } from "react";
 import type { I18n } from "../i18n";
-import Layout from "../components/Layout";
-import { KcContextBase, KcProps } from "keycloakify";
 import { Alert, Button, Text, Title, useMantineTheme } from "@mantine/core";
 import { IconAlertOctagon, IconAlertTriangle } from "@tabler/icons";
+import Layout from "../components/Layout";
+import { PageProps } from "keycloakify/login";
+import { KcContext } from "login/kcContext";
 
-export type InfoProps = KcProps & {
-  kcContext: KcContextBase.Info;
-  i18n: I18n;
-  doFetchDefaultThemeResources?: boolean;
-};
 
-const Info = memo((props: InfoProps) => {
-  const {
-    kcContext,
-    i18n,
-    doFetchDefaultThemeResources = true,
-    ...kcProps
-  } = props;
+export default function Info(props: PageProps<Extract<KcContext, { pageId: "info.ftl" }>, I18n>) {
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+
 
   const { msgStr, msg } = i18n;
 
@@ -33,7 +25,7 @@ const Info = memo((props: InfoProps) => {
 
   return (
     <Layout
-      {...{ kcContext, i18n, doFetchDefaultThemeResources, ...kcProps }}
+      {...{ kcContext, i18n, doUseDefaultCss, classes }}
       displayMessage={false}
     >
       <Title
@@ -82,6 +74,4 @@ const Info = memo((props: InfoProps) => {
       )}
     </Layout>
   );
-});
-
-export default Info;
+}

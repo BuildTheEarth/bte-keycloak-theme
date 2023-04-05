@@ -1,15 +1,11 @@
 import { createRoot } from "react-dom/client";
-import { StrictMode } from "react";
-import { kcContext } from "./kcContext";
-import KcApp from "KcApp";
+import { StrictMode, Suspense, lazy } from "react";
+import { kcContext as kcLoginThemeContext } from "./login/kcContext";
+import { kcContext as kcAccountThemeContext } from "./account/kcContext";
 import { MantineProvider } from "@mantine/core";
 
-if (kcContext === undefined) {
-  throw new Error(
-    "This app is a Keycloak theme" +
-      "It isn't meant to be deployed outside of Keycloak"
-  );
-}
+const KcLoginThemeApp = lazy(() => import("./login/KcApp"));
+const KcAccountThemeApp = lazy(() => import("./account/KcApp"));
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -24,7 +20,23 @@ createRoot(document.getElementById("root")!).render(
         },
       }}
     >
-      <KcApp kcContext={kcContext} />
+      <StrictMode>
+        <Suspense>
+            {(()=>{
+
+                if( kcLoginThemeContext !== undefined ){
+                    return <KcLoginThemeApp kcContext={kcLoginThemeContext} />;
+                }
+
+                if( kcAccountThemeContext !== undefined ){
+                    return <KcAccountThemeApp kcContext={kcAccountThemeContext} />;
+                }
+
+                return <p>Error</p>;
+
+            })()}
+        </Suspense>
+    </StrictMode>
     </MantineProvider>
   </StrictMode>
 );

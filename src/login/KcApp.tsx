@@ -1,7 +1,6 @@
 import "./KcApp.css";
 import React, { lazy, Suspense } from "react";
 import type { KcContext } from "./kcContext";
-import KcAppBase, { defaultKcProps } from "keycloakify";
 import { useI18n } from "./i18n";
 import {
   ColorScheme,
@@ -11,19 +10,25 @@ import {
 import { useColorScheme, useLocalStorage } from "@mantine/hooks";
 import { NotificationsProvider } from "@mantine/notifications";
 import Error from "./pages/Error";
-import Info from "pages/Info";
-import LoginOtp from "pages/LoginOtp";
+import Info from "./pages/Info";
+import LoginOtp from "./pages/LoginOtp";
 import LoginResetPassword from "./pages/LoginResetPassword";
-import LoginVerifyEmail from "pages/LoginVerifyEmail";
-import LoginPageExpired from "pages/LoginPageExpired";
+import LoginVerifyEmail from "./pages/LoginVerifyEmail";
+import LoginPageExpired from "./pages/LoginPageExpired";
+import Fallback from "keycloakify/login";
 
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const Terms = lazy(() => import("./pages/Terms"));
-const WebauthnAuthenticate = lazy(() => import("./pages/WebauthnAuthenticate"));
+
+const Template = lazy(() => import("./components/Layout.tsx"));
 
 export type Props = {
   kcContext: KcContext;
+};
+
+const classes: PageProps<any, any>["classes"] = {
+    
 };
 
 export default function KcApp({ kcContext }: Props) {
@@ -70,27 +75,24 @@ export default function KcApp({ kcContext }: Props) {
             {(() => {
               switch (kcContext.pageId) {
                 case "register.ftl":
-                  return <Register {...{ kcContext, ...props }} />;
+                  return <Register {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                 case "login.ftl":
-                  return <Login {...{ kcContext, ...props }} />;
+                  return <Login {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                 case "terms.ftl":
-                  return <Terms {...{ kcContext, ...props }} />;
-                case "webauthn-authenticate.ftl":
-                  return <WebauthnAuthenticate {...{ kcContext, ...props }} />;
+                  return <Terms {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                 case "error.ftl":
-                  return <Error {...{ kcContext, ...props }} />;
+                  return <Error {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                 case "info.ftl":
-                  return <Info {...{ kcContext, ...props }} />;
+                  return <Info {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                 case "login-otp.ftl":
-                  return <LoginOtp {...{ kcContext, ...props }} />;
+                  return <LoginOtp {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                 case "login-reset-password.ftl":
-                  return <LoginResetPassword {...{ kcContext, ...props }} />;
+                  return <LoginResetPassword {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                 case "login-verify-email.ftl":
-                  return <LoginVerifyEmail {...{ kcContext, ...props }} />;
+                  return <LoginVerifyEmail {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                 case "login-page-expired.ftl":
-                  return <LoginPageExpired {...{ kcContext, ...props }} />;
-                default:
-                  return <KcAppBase {...{ kcContext, ...props }} />;
+                  return <LoginPageExpired {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
+                default: return <p>This page is not implemented yet: ${kcContext.pageId}</p>;
               }
             })()}
           </Suspense>

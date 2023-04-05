@@ -1,8 +1,7 @@
 import { memo, useEffect } from "react";
-import Template, { TemplateProps } from "keycloakify/lib/components/Template";
-import type { KcContextBase, KcProps } from "keycloakify";
-import type { KcContext } from "../kcContext";
-import { clsx } from "keycloakify/lib/tools/clsx";
+import Layout from "../components/Layout";
+import { PageProps } from "keycloakify/login";
+import { KcContext } from "login/kcContext";
 import type { I18n } from "../i18n";
 import {
   TextInput,
@@ -17,25 +16,12 @@ import {
   Button,
   Box,
 } from "@mantine/core";
-import Layout from "components/Layout";
 import { useForm } from "@mantine/form";
 import ReCAPTCHA from "react-google-recaptcha";
 
-type KcContext_Register = Extract<KcContext, { pageId: "register.ftl" }>;
 
-export type RegisterProps = KcProps & {
-  kcContext: KcContextBase.Register;
-  i18n: I18n;
-  doFetchDefaultThemeResources?: boolean;
-};
-
-const Register = memo((props: RegisterProps) => {
-  const {
-    kcContext,
-    i18n,
-    doFetchDefaultThemeResources = true,
-    ...kcProps
-  } = props;
+export default function Register(props: PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n>) {
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
   const {
     url,
     messagesPerField,
@@ -84,7 +70,7 @@ const Register = memo((props: RegisterProps) => {
   }, []);
 
   return (
-    <Layout {...{ kcContext, i18n, doFetchDefaultThemeResources, ...kcProps }}>
+    <Layout {...{ kcContext, i18n, doUseDefaultCss, classes }}>
       <Container
         sx={{
           flex: 1,
@@ -186,6 +172,4 @@ const Register = memo((props: RegisterProps) => {
       </Container>
     </Layout>
   );
-});
-
-export default Register;
+}
