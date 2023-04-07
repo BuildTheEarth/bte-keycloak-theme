@@ -59,7 +59,8 @@ export default function Layout(props: TemplateProps<KcContext, I18n>) {
         kcContext,
         i18n,
         doUseDefaultCss,
-        children
+        children,
+        headerNode,
     } = props;
 
     const {msg, changeLocale, labelBySupportedLanguageTag, currentLanguageTag, msgStr} =
@@ -166,10 +167,15 @@ export default function Layout(props: TemplateProps<KcContext, I18n>) {
             <Box
                 sx={{
                     flex: 1,
-                    backgroundImage: "url('https://nach.link/KCVUT')",
+                    backgroundImage: "url('https://cms.bte-germany.de/assets/0460d0cd-de39-4172-8fa3-b227e9eec111?format=webp&q=50')",
                     backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat"
                 }}
-            ></Box>
+            >
+
+            </Box>
+
+
         </Box>
     );
 }

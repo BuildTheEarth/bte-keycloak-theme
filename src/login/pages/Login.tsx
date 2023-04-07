@@ -27,7 +27,7 @@ import { useForm } from "@mantine/form";
 import {
   IconBox,
   IconBrandApple,
-  IconBrandDiscord,
+  IconBrandDiscord, IconBrandGithub,
   IconBrandGoogle,
 } from "@tabler/icons";
 import { PageProps } from "keycloakify/login";
@@ -59,6 +59,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
         return <IconBrandGoogle />;
       case "apple":
         return <IconBrandApple />;
+      case "github":
+        return <IconBrandGithub />;
       default:
         return <IconBox />;
     }

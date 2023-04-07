@@ -4,8 +4,32 @@ export const { kcContext } = getKcContext<{
   pageId: "register.ftl";
   authorizedMailDomains: string[];
 }>({
-  mockPageId: "login-page-expired.ftl",
+  mockPageId: "idp-review-user-profile.ftl",
   mockData: [
+    {
+      pageId: "login-idp-link-email.ftl",
+      realm: {
+        displayNameHtml:
+            "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayName: "Build the Earth",
+      },
+    },
+    {
+      pageId: "idp-review-user-profile.ftl",
+      realm: {
+        displayNameHtml:
+            "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayName: "Build the Earth",
+      },
+    },
+    {
+      pageId: "login-idp-link-confirm.ftl",
+      realm: {
+        displayNameHtml:
+            "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayName: "Build the Earth",
+      },
+    },
     {
       pageId: "login-page-expired.ftl",
       realm: {
@@ -98,12 +122,8 @@ export const { kcContext } = getKcContext<{
             displayName: "Discord",
           },
           {
-            alias: "google",
-            displayName: "Google",
-          },
-          {
-            alias: "apple",
-            displayName: "Apple",
+            alias: "github",
+            displayName: "GitHub",
           },
         ],
       },

@@ -1,6 +1,5 @@
 import {
-    evtTermMarkdown,
-    useDownloadTerms
+    evtTermMarkdown
 } from "keycloakify/login/lib/useDownloadTerms";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
@@ -20,6 +19,7 @@ import {
 import ReactMarkdown from "react-markdown";
 import { PageProps } from "keycloakify/login";
 import Layout from "login/components/Layout";
+import { useDownloadTerms } from "keycloakify/login";
 
 
 type KcContext_Terms = Extract<KcContext, { pageId: "terms.ftl" }>;
@@ -28,35 +28,40 @@ export default function Terms(props: PageProps<Extract<KcContext, { pageId: "ter
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
 
-    const { url } = kcContext;
+    const { msg, msgStr } = i18n;
     const { colorScheme } = useMantineColorScheme();
     const dark = colorScheme === "dark";
 
     useDownloadTerms({
-      kcContext,
-      downloadTermMarkdown: async ({ currentLanguageTag }) => {
-        const markdownString = await fetch(
-          (() => {
-            switch (currentLanguageTag) {
-              case "fr":
-                return tos_fr_url;
-              default:
-                return tos_en_url;
-            }
-          })()
-        ).then((response) => response.text());
+        kcContext,
+        "downloadTermMarkdown": async ({currentLanguageTag}) => {
 
-        return markdownString;
-      },
+            const resource = (() => {
+                switch (currentLanguageTag) {
+                    case "fr":
+                        return tos_fr_url;
+                    default:
+                        return tos_en_url;
+                }
+            })();
+
+            if (resource.includes("\n")) return resource
+
+            const response = await fetch(resource);
+            return response.text();
+        },
     });
 
     useRerenderOnStateChange(evtTermMarkdown);
 
-    if (evtTermMarkdown.state === undefined) {
-      return null;
+    const { url } = kcContext;
+
+    const termMarkdown = evtTermMarkdown.state;
+
+    if (termMarkdown === undefined) {
+        return null;
     }
 
-    const { msg, msgStr } = i18n;
 
     return (
       <Layout {...{ kcContext, i18n, doUseDefaultCss, classes }}>

@@ -8,6 +8,7 @@ export type TemplateProps<
   kcContext: KcContext;
   i18n: I18nExtended;
   doUseDefaultCss: boolean;
+  headerNode?: ReactNode;
   hideLoggedIn?: boolean;
   classes?: Partial<Record<ClassKey, string>>;
   displayInfo?: boolean;

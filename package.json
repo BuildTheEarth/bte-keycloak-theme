@@ -29,7 +29,7 @@
         "@types/react-lottie": "^1.2.6",
         "dayjs": "^1.11.6",
         "evt": "^2.4.1",
-        "keycloakify": "^7.6.3",
+        "keycloakify": "^7.6.6",
         "react": "18.1.0",
         "react-dom": "18.1.0",
         "react-google-recaptcha": "^2.1.0",
