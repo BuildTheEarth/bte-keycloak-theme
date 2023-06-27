@@ -4,69 +4,70 @@ export const { kcContext } = getKcContext<{
   pageId: "register.ftl";
   authorizedMailDomains: string[];
 }>({
-  mockPageId: "idp-review-user-profile.ftl",
+  /*
+  TODO:
+  - login-update-password
+  - login-update-profile
+  - logout-confirm
+  - saml-post-form
+  - update-email
+  - update-user-profile
+  */
+  mockPageId: "update-email.ftl",
   mockData: [
     {
       pageId: "login-idp-link-email.ftl",
       realm: {
-        displayNameHtml:
-            "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "Build the Earth",
       },
     },
     {
       pageId: "idp-review-user-profile.ftl",
       realm: {
-        displayNameHtml:
-            "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "Build the Earth",
       },
     },
     {
       pageId: "login-idp-link-confirm.ftl",
       realm: {
-        displayNameHtml:
-            "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "Build the Earth",
       },
     },
     {
       pageId: "login-page-expired.ftl",
       realm: {
-        displayNameHtml:
-          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "Build the Earth",
       },
     },
     {
       pageId: "login-verify-email.ftl",
       realm: {
-        displayNameHtml:
-          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "Build the Earth",
       },
     },
     {
       pageId: "login-reset-password.ftl",
       realm: {
-        displayNameHtml:
-          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "Build the Earth",
       },
     },
     {
       pageId: "terms.ftl",
       realm: {
-        displayNameHtml:
-          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "Build the Earth",
       },
     },
     {
       pageId: "login-otp.ftl",
       realm: {
-        displayNameHtml:
-          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "Build the Earth",
       },
       auth: {
@@ -78,16 +79,14 @@ export const { kcContext } = getKcContext<{
     {
       pageId: "error.ftl",
       realm: {
-        displayNameHtml:
-          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "Build the Earth",
       },
     },
     {
       pageId: "webauthn-authenticate.ftl",
       realm: {
-        displayNameHtml:
-          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "Build the Earth",
       },
       message: {
@@ -111,8 +110,7 @@ export const { kcContext } = getKcContext<{
     {
       pageId: "login.ftl",
       realm: {
-        displayNameHtml:
-          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "Build the Earth",
       },
       social: {
@@ -134,8 +132,7 @@ export const { kcContext } = getKcContext<{
     {
       pageId: "register.ftl",
       realm: {
-        displayNameHtml:
-          "<img src='/keycloak_static/resources/img/logo.png' width='50px'>",
+        displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "Build the Earth",
       },
       recaptchaRequired: true,

@@ -1,27 +1,29 @@
-import { memo, useEffect } from "react";
-import Layout from "../components/Layout";
-import { PageProps } from "keycloakify/login";
-import { KcContext } from "login/kcContext";
-import type { I18n } from "../i18n";
 import {
-  TextInput,
-  PasswordInput,
-  Checkbox,
   Anchor,
-  Paper,
-  Title,
-  Text,
+  Box,
+  Button,
+  Checkbox,
   Container,
   Group,
-  Button,
-  Box,
+  Paper,
+  PasswordInput,
+  Text,
+  TextInput,
+  Title,
 } from "@mantine/core";
-import { useForm } from "@mantine/form";
+import { memo, useEffect } from "react";
+
+import type { I18n } from "../i18n";
+import { KcContext } from "login/kcContext";
+import Layout from "../components/Layout";
+import { PageProps } from "keycloakify/login";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useForm } from "@mantine/form";
 
-
-export default function Register(props: PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n>) {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+export default function Register(
+  props: PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n>
+) {
+  const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
   const {
     url,
     messagesPerField,
@@ -71,105 +73,94 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
 
   return (
     <Layout {...{ kcContext, i18n, doUseDefaultCss, classes }}>
-      <Container
-        sx={{
-          flex: 1,
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          height: "100%",
-        }}
-        size="xs"
-      >
-        <div>
-          <Title color={"light"} sx={{ fontWeight: 700 }}>
-            {msg("registerTitle")}
-          </Title>
+      <div>
+        <Title color={"light"} sx={{ fontWeight: 700 }}>
+          {msg("registerTitle")}
+        </Title>
 
-          <Text color="dimmed" size="sm" mt={5} mb="xl">
-            {msg("registerText")}
-          </Text>
+        <Text color="dimmed" size="sm" mt={5} mb="xl">
+          {msg("registerText")}
+        </Text>
 
-          <form
-            action={url.registrationAction}
-            method="post"
-            onSubmit={(event) => {
-              if (!form.isValid()) {
-                form.validate();
-                event.preventDefault();
-              }
-            }}
-          >
-            <input
-              type="text"
-              id="firstName"
-              value={"a"}
-              style={{ display: "none" }}
-            />
+        <form
+          action={url.registrationAction}
+          method="post"
+          onSubmit={(event) => {
+            if (!form.isValid()) {
+              form.validate();
+              event.preventDefault();
+            }
+          }}
+        >
+          <input
+            type="text"
+            id="firstName"
+            value={"a"}
+            style={{ display: "none" }}
+          />
 
-            <input
-              type="text"
-              id="lastName"
-              value={"b"}
-              style={{ display: "none" }}
-            />
-            {!realm.registrationEmailAsUsername && (
-              <TextInput
-                label={msg("username")}
-                autoComplete="username"
-                required
-                name="username"
-                {...form.getInputProps("username")}
-              />
-            )}
-
+          <input
+            type="text"
+            id="lastName"
+            value={"b"}
+            style={{ display: "none" }}
+          />
+          {!realm.registrationEmailAsUsername && (
             <TextInput
-              label={msg("email")}
+              label={msg("username")}
+              autoComplete="username"
               required
-              mt="md"
-              name="email"
-              {...form.getInputProps("email")}
+              name="username"
+              {...form.getInputProps("username")}
             />
+          )}
 
-            {passwordRequired && (
-              <>
-                <PasswordInput
-                  label={msg("password")}
-                  placeholder=""
-                  required
-                  mt="md"
-                  name="password"
-                  {...form.getInputProps("password")}
-                />
-                <PasswordInput
-                  label={msg("passwordConfirm")}
-                  placeholder=""
-                  required
-                  mt="md"
-                  name="password-confirm"
-                  {...form.getInputProps("password-confirm")}
-                />
-              </>
-            )}
+          <TextInput
+            label={msg("email")}
+            required
+            mt="md"
+            name="email"
+            {...form.getInputProps("email")}
+          />
 
-            {recaptchaRequired && (
-              <Box mt="lg">
-                <div id="captcha" />
-              </Box>
-            )}
+          {passwordRequired && (
+            <>
+              <PasswordInput
+                label={msg("password")}
+                placeholder=""
+                required
+                mt="md"
+                name="password"
+                {...form.getInputProps("password")}
+              />
+              <PasswordInput
+                label={msg("passwordConfirm")}
+                placeholder=""
+                required
+                mt="md"
+                name="password-confirm"
+                {...form.getInputProps("password-confirm")}
+              />
+            </>
+          )}
 
-            <Button fullWidth mt="xl" color={"white"} type="submit">
-              {msgStr("doRegister")}
-            </Button>
-
-            <Box mt="xl" sx={{ display: "flex", justifyContent: "center" }}>
-              <Anchor href={url.loginUrl} color="white" size={"sm"}>
-                {msgStr("registerBackToLogin")}
-              </Anchor>
+          {recaptchaRequired && (
+            <Box mt="lg">
+              <div id="captcha" />
             </Box>
-          </form>
-        </div>
-      </Container>
+          )}
+
+          <Button fullWidth mt="xl" color={"white"} type="submit">
+            {msgStr("doRegister")}
+          </Button>
+
+          <Box mt="xl" sx={{ display: "flex", justifyContent: "center" }}>
+            <Anchor href={url.loginUrl} color="white" size={"sm"}>
+              {msgStr("registerBackToLogin")}
+            </Anchor>
+          </Box>
+        </form>
+      </div>
     </Layout>
   );
 }

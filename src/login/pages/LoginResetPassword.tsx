@@ -1,14 +1,19 @@
-import React from "react";
+import { Button, Container, Text, TextInput, Title } from "@mantine/core";
+
 import type { I18n } from "../i18n";
+import { KcContext } from "login/kcContext";
 import Layout from "../components/Layout";
 import { PageProps } from "keycloakify/login";
-import { KcContext } from "login/kcContext";
-import { Container, TextInput, Title, Text, Button } from "@mantine/core";
+import React from "react";
 import { useForm } from "@mantine/form";
 
-
-export default function LoginResetPassword(props: PageProps<Extract<KcContext, { pageId: "login-reset-password.ftl" }>, I18n>) {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+export default function LoginResetPassword(
+  props: PageProps<
+    Extract<KcContext, { pageId: "login-reset-password.ftl" }>,
+    I18n
+  >
+) {
+  const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
   const { url, realm, auth } = kcContext;
 
@@ -32,59 +37,48 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
 
   return (
     <Layout {...{ kcContext, i18n, doUseDefaultCss, classes }}>
-      <Container
-        sx={{
-          flex: 1,
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          height: "100%",
+      <Title color={"light"} sx={{ fontWeight: 700 }}>
+        {msg("emailForgotTitle")}
+      </Title>
+      <Text color="dimmed">{msg("emailInstruction")}</Text>
+      <form
+        action={url.loginAction}
+        method="post"
+        onSubmit={(event) => {
+          if (!form.isValid()) {
+            form.validate();
+            event.preventDefault();
+          }
         }}
-        size="xs"
       >
-        <Title color={"light"} sx={{ fontWeight: 700 }}>
-          {msg("emailForgotTitle")}
-        </Title>
-        <Text color="dimmed">{msg("emailInstruction")}</Text>
-        <form
-          action={url.loginAction}
-          method="post"
-          onSubmit={(event) => {
-            if (!form.isValid()) {
-              form.validate();
-              event.preventDefault();
-            }
-          }}
+        <TextInput
+          label={
+            !realm.loginWithEmailAllowed
+              ? msg("username")
+              : !realm.registrationEmailAsUsername
+              ? msg("usernameOrEmail")
+              : msg("email")
+          }
+          required
+          mt="md"
+          name="username"
+          {...form.getInputProps("username")}
+        />
+
+        <Button type="submit" fullWidth mt="xl">
+          {msgStr("doSubmit")}
+        </Button>
+
+        <Button
+          component="a"
+          href={url.loginUrl}
+          variant="outline"
+          fullWidth
+          mt="xl"
         >
-          <TextInput
-            label={
-              !realm.loginWithEmailAllowed
-                ? msg("username")
-                : !realm.registrationEmailAsUsername
-                ? msg("usernameOrEmail")
-                : msg("email")
-            }
-            required
-            mt="md"
-            name="username"
-            {...form.getInputProps("username")}
-          />
-
-          <Button type="submit" fullWidth mt="xl">
-            {msgStr("doSubmit")}
-          </Button>
-
-          <Button
-            component="a"
-            href={url.loginUrl}
-            variant="outline"
-            fullWidth
-            mt="xl"
-          >
-            {msg("backToLogin")}
-          </Button>
-        </form>
-      </Container>
+          {msg("backToLogin")}
+        </Button>
+      </form>
     </Layout>
   );
 }

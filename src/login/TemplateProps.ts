@@ -1,6 +1,7 @@
-import type { ReactNode } from "react";
 import type { I18n } from "./i18n";
 import type { KcContext } from "keycloakify/login/kcContext";
+import type { ReactNode } from "react";
+
 export type TemplateProps<
   KcContext extends KcContext.Common,
   I18nExtended extends I18n
@@ -19,6 +20,7 @@ export type TemplateProps<
   showUsernameNode?: ReactNode;
   infoNode?: ReactNode;
   children: ReactNode;
+  centeredContent?: boolean;
 };
 export type ClassKey =
   | "kcHtmlClass"
