@@ -82,16 +82,7 @@ export default function Register(
           {msg("registerText")}
         </Text>
 
-        <form
-          action={url.registrationAction}
-          method="post"
-          onSubmit={(event) => {
-            if (!form.isValid()) {
-              form.validate();
-              event.preventDefault();
-            }
-          }}
-        >
+        <form action={url.registrationAction} method="post">
           <input
             type="text"
             id="firstName"
@@ -111,7 +102,7 @@ export default function Register(
               autoComplete="username"
               required
               name="username"
-              {...form.getInputProps("username")}
+              // {...form.getInputProps("username")}
             />
           )}
 
@@ -120,7 +111,7 @@ export default function Register(
             required
             mt="md"
             name="email"
-            {...form.getInputProps("email")}
+            // {...form.getInputProps("email")}
           />
 
           {passwordRequired && (
@@ -131,7 +122,8 @@ export default function Register(
                 required
                 mt="md"
                 name="password"
-                {...form.getInputProps("password")}
+                autoComplete="new-password"
+                // {...form.getInputProps("password")}
               />
               <PasswordInput
                 label={msg("passwordConfirm")}
@@ -139,7 +131,8 @@ export default function Register(
                 required
                 mt="md"
                 name="password-confirm"
-                {...form.getInputProps("password-confirm")}
+                autoComplete="new-password"
+                // {...form.getInputProps("password-confirm")}
               />
             </>
           )}
