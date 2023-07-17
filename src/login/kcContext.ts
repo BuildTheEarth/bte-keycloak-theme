@@ -13,7 +13,7 @@ export const { kcContext } = getKcContext<{
   - update-email
   - update-user-profile
   */
-  mockPageId: "update-email.ftl",
+  mockPageId: "register.ftl",
   mockData: [
     {
       pageId: "login-idp-link-email.ftl",
@@ -135,8 +135,6 @@ export const { kcContext } = getKcContext<{
         displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "Build the Earth",
       },
-      recaptchaRequired: true,
-      recaptchaSiteKey: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
     },
   ],
 });

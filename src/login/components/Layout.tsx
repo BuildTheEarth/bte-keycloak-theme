@@ -1,6 +1,7 @@
 import {
   Alert,
   Anchor,
+  BackgroundImage,
   Box,
   Button,
   Container,
@@ -187,15 +188,10 @@ export default function Layout(props: TemplateProps<KcContext, I18n>) {
         </Box>
       </Paper>
 
-      <Box
-        sx={{
-          flex: 1,
-          backgroundImage:
-            "url('https://cms.bte-germany.de/assets/0460d0cd-de39-4172-8fa3-b227e9eec111?format=webp&q=50')",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      ></Box>
+      <BackgroundImage
+        src="https://cms.bte-germany.de/assets/0460d0cd-de39-4172-8fa3-b227e9eec111?format=webp&q=50"
+        style={{ flex: 1 }}
+      ></BackgroundImage>
     </Box>
   );
 }
