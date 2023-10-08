@@ -173,7 +173,7 @@ export default function Layout(props: TemplateProps<KcContext, I18n>) {
       </Paper>
 
       <BackgroundImage
-        src="https://cms.bte-germany.de/assets/0460d0cd-de39-4172-8fa3-b227e9eec111?format=webp"
+        src="https://cdn.buildtheearth.net/static/thumbnails/auth.webp"
         style={{ flex: 1 }}
       ></BackgroundImage>
     </Box>
