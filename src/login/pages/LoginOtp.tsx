@@ -1,18 +1,11 @@
-import {
-  Group,
-  Input,
-  Title,
-  Text,
-  Button,
-  Container,
-  Anchor,
-} from "@mantine/core";
-import React, { useEffect, memo, useState } from "react";
+import { Anchor, Button, Container, Text, Title } from "@mantine/core";
+
+import AuthCode from "login/components/AuthCode";
 import type { I18n } from "../i18n";
-import { PageProps } from "keycloakify/login";
 import { KcContext } from "login/kcContext";
 import Layout from "../components/Layout";
-import AuthCode from "login/components/AuthCode";
+import { PageProps } from "keycloakify/login";
+import { useState } from "react";
 
 export default function LoginOtp(
   props: PageProps<Extract<KcContext, { pageId: "login-otp.ftl" }>, I18n>

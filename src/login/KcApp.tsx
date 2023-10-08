@@ -5,7 +5,7 @@ import {
   ColorSchemeProvider,
   MantineProvider,
 } from "@mantine/core";
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { useColorScheme, useLocalStorage } from "@mantine/hooks";
 
 import Error from "./pages/Error";

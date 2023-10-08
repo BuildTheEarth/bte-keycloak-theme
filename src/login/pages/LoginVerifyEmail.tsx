@@ -1,12 +1,4 @@
-import {
-  Anchor,
-  Container,
-  Text,
-  Title,
-  TypographyStylesProvider,
-  useMantineTheme,
-} from "@mantine/core";
-import React, { memo } from "react";
+import { Anchor, Text, Title, useMantineTheme } from "@mantine/core";
 
 import type { I18n } from "../i18n";
 import { IconMailbox } from "@tabler/icons";

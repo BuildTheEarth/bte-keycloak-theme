@@ -1,10 +1,11 @@
-import { useEffect, Fragment } from "react";
-import type { ClassKey } from "keycloakify/login/TemplateProps";
-import { clsx } from "keycloakify/tools/clsx";
-import { useFormValidation } from "keycloakify/login/lib/useFormValidation";
+import { Fragment, useEffect } from "react";
+
 import type { Attribute } from "keycloakify/login/kcContext/KcContext";
+import type { ClassKey } from "keycloakify/login/TemplateProps";
 import { I18n } from "../i18n";
 import { TextInput } from "@mantine/core";
+import { clsx } from "keycloakify/tools/clsx";
+import { useFormValidation } from "keycloakify/login/lib/useFormValidation";
 
 export type UserProfileFormFieldsProps = {
   kcContext: Parameters<typeof useFormValidation>[0]["kcContext"];

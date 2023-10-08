@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { clsx } from "keycloakify/tools/clsx";
-import type { PageProps } from "keycloakify/login/pages/PageProps";
-import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
-import type { KcContext } from "../kcContext";
-import type { I18n } from "../i18n";
 import { Button, Container, Title } from "@mantine/core";
+
+import type { I18n } from "../i18n";
+import type { KcContext } from "../kcContext";
+import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { UserProfileFormFields } from "../components/UserProfileFormFields";
+import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
+import { useState } from "react";
 
 export default function IdpReviewUserProfile(
   props: PageProps<

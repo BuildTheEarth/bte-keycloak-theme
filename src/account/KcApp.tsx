@@ -1,7 +1,9 @@
 import "./KcApp.css";
-import { lazy, Suspense } from "react";
-import type { PageProps } from "keycloakify/account";
+
+import { Suspense, lazy } from "react";
+
 import type { KcContext } from "./kcContext";
+import type { PageProps } from "keycloakify/account";
 import { useI18n } from "./i18n";
 
 const Template = lazy(() => import("./Template"));

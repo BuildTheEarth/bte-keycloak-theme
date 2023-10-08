@@ -9,11 +9,7 @@ import {
   Box,
   Button,
   Checkbox,
-  Container,
   Divider,
-  Flex,
-  Group,
-  Paper,
   PasswordInput,
   SimpleGrid,
   Text,
@@ -27,13 +23,11 @@ import {
   IconBrandGithub,
   IconBrandGoogle,
 } from "@tabler/icons";
-import { memo, useEffect } from "react";
 
 import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
 import Layout from "login/components/Layout";
 import { PageProps } from "keycloakify/login";
-import { useForm } from "@mantine/form";
 
 export default function Login(
   props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>

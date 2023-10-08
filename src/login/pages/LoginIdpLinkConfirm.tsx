@@ -1,24 +1,9 @@
-import {
-  Anchor,
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  Divider,
-  PasswordInput,
-  SimpleGrid,
-  Text,
-  TextInput,
-  Title,
-  useMantineTheme,
-} from "@mantine/core";
+import { Box, Button, Container, Title, useMantineTheme } from "@mantine/core";
 
 import type { I18n } from "../i18n";
 import { IconAlertTriangle } from "@tabler/icons";
 import type { KcContext } from "../kcContext";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
-import React from "react";
-import { clsx } from "keycloakify/tools/clsx";
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 
 export default function LoginIdpLinkConfirm(

@@ -1,8 +1,8 @@
-import { clsx } from "keycloakify/tools/clsx";
-import type { PageProps } from "keycloakify/account/pages/PageProps";
-import { useGetClassName } from "keycloakify/account/lib/useGetClassName";
-import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
+import type { KcContext } from "../kcContext";
+import type { PageProps } from "keycloakify/account/pages/PageProps";
+import { clsx } from "keycloakify/tools/clsx";
+import { useGetClassName } from "keycloakify/account/lib/useGetClassName";
 
 export default function LogoutConfirm(
   props: PageProps<Extract<KcContext, { pageId: "password.ftl" }>, I18n>

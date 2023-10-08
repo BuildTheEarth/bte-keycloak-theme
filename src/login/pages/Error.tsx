@@ -1,10 +1,10 @@
-import React, { memo } from "react";
-import type { I18n } from "../i18n";
-import Layout from "../components/Layout";
 import { Alert, Button, Title, useMantineTheme } from "@mantine/core";
-import { IconAlertOctagon, IconAlertTriangle } from "@tabler/icons";
-import { PageProps } from "keycloakify/login";
+
+import type { I18n } from "../i18n";
+import { IconAlertTriangle } from "@tabler/icons";
 import { KcContext } from "login/kcContext";
+import Layout from "../components/Layout";
+import { PageProps } from "keycloakify/login";
 
 export default function Error(
   props: PageProps<Extract<KcContext, { pageId: "error.ftl" }>, I18n>

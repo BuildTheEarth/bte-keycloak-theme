@@ -1,5 +1,4 @@
 import {
-  Alert,
   Anchor,
   BackgroundImage,
   Box,
@@ -11,29 +10,14 @@ import {
   Text,
   createStyles,
 } from "@mantine/core";
-import {
-  IconAlertCircle,
-  IconAlertTriangle,
-  IconCheck,
-  IconCircleCheck,
-  IconCircleX,
-  IconInfoCircle,
-  IconX,
-} from "@tabler/icons";
-import React, {
-  PropsWithChildren,
-  ReactComponentElement,
-  ReactNode,
-  useEffect,
-} from "react";
+import { IconAlertTriangle, IconCheck, IconX } from "@tabler/icons";
 
 import { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
-import { LanguageSwitcher } from "./LanguageSwitcher";
 import { TemplateProps } from "../TemplateProps";
 import { ThemeSwitchButton } from "./ThemeSwitchButton";
-import { from } from "evt/lib/Evt.from";
 import { showNotification } from "@mantine/notifications";
+import { useEffect } from "react";
 
 const useStyles = createStyles((theme) => ({
   loginSidebar: {
@@ -163,7 +147,7 @@ export default function Layout(props: TemplateProps<KcContext, I18n>) {
               </MediaQuery>
             </Group>
             <Group>
-              {/*<LanguageSwitcher i18n={i18n} kcContext={kcContext} />*/}
+              {/* <LanguageSwitcher i18n={i18n} kcContext={kcContext} /> */}
               <ThemeSwitchButton />
             </Group>
           </Group>
@@ -189,7 +173,7 @@ export default function Layout(props: TemplateProps<KcContext, I18n>) {
       </Paper>
 
       <BackgroundImage
-        src="https://cms.bte-germany.de/assets/0460d0cd-de39-4172-8fa3-b227e9eec111?format=webp&q=50"
+        src="https://cms.bte-germany.de/assets/0460d0cd-de39-4172-8fa3-b227e9eec111?format=webp"
         style={{ flex: 1 }}
       ></BackgroundImage>
     </Box>

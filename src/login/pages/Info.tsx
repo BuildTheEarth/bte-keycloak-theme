@@ -1,10 +1,9 @@
-import React, { memo } from "react";
+import { Alert, Button, Title } from "@mantine/core";
+
 import type { I18n } from "../i18n";
-import { Alert, Button, Text, Title, useMantineTheme } from "@mantine/core";
-import { IconAlertOctagon, IconAlertTriangle } from "@tabler/icons";
+import { KcContext } from "login/kcContext";
 import Layout from "../components/Layout";
 import { PageProps } from "keycloakify/login";
-import { KcContext } from "login/kcContext";
 
 export default function Info(
   props: PageProps<Extract<KcContext, { pageId: "info.ftl" }>, I18n>

@@ -1,10 +1,9 @@
 import { Anchor, Container, Title, useMantineTheme } from "@mantine/core";
-import { IconAlertTriangle, IconLink } from "@tabler/icons";
 
 import type { I18n } from "keycloakify/login/i18n";
+import { IconLink } from "@tabler/icons";
 import type { KcContext } from "keycloakify/login/kcContext";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
-import React from "react";
 
 export default function LoginIdpLinkEmail(
   props: PageProps<

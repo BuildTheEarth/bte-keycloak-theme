@@ -1,8 +1,9 @@
-import { createRoot } from "react-dom/client";
 import { StrictMode, Suspense, lazy } from "react";
-import { kcContext as kcLoginThemeContext } from "./login/kcContext";
-import { kcContext as kcAccountThemeContext } from "./account/kcContext";
+
 import { MantineProvider } from "@mantine/core";
+import { createRoot } from "react-dom/client";
+import { kcContext as kcAccountThemeContext } from "./account/kcContext";
+import { kcContext as kcLoginThemeContext } from "./login/kcContext";
 
 const KcLoginThemeApp = lazy(() => import("./login/KcApp"));
 const KcAccountThemeApp = lazy(() => import("./account/KcApp"));

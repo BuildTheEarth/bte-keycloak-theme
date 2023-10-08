@@ -1,13 +1,14 @@
-import { useState } from "react";
 import {
-  createStyles,
-  UnstyledButton,
-  Menu,
-  Image,
   Group,
+  Image,
+  Menu,
+  UnstyledButton,
+  createStyles,
 } from "@mantine/core";
+
 import { IconChevronDown } from "@tabler/icons";
 import { KcContext } from "login/kcContext";
+import { useState } from "react";
 
 const useStyles = createStyles((theme, { opened }: { opened: boolean }) => ({
   control: {

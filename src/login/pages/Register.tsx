@@ -2,22 +2,17 @@ import {
   Anchor,
   Box,
   Button,
-  Checkbox,
-  Container,
-  Group,
-  Paper,
   PasswordInput,
   Text,
   TextInput,
   Title,
 } from "@mantine/core";
-import { memo, useEffect } from "react";
 
 import type { I18n } from "../i18n";
 import { KcContext } from "login/kcContext";
 import Layout from "../components/Layout";
 import { PageProps } from "keycloakify/login";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useEffect } from "react";
 import { useForm } from "@mantine/form";
 
 export default function Register(

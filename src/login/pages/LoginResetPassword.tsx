@@ -1,10 +1,9 @@
-import { Button, Container, Text, TextInput, Title } from "@mantine/core";
+import { Button, Text, TextInput, Title } from "@mantine/core";
 
 import type { I18n } from "../i18n";
 import { KcContext } from "login/kcContext";
 import Layout from "../components/Layout";
 import { PageProps } from "keycloakify/login";
-import React from "react";
 import { useForm } from "@mantine/form";
 
 export default function LoginResetPassword(

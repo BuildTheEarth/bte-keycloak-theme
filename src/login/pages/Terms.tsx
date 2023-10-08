@@ -7,16 +7,15 @@ import {
   TypographyStylesProvider,
   useMantineColorScheme,
 } from "@mantine/core";
+import { PageProps, useDownloadTerms } from "keycloakify/login";
 
 import { Evt } from "evt";
 import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
 import Layout from "login/components/Layout";
-import { PageProps } from "keycloakify/login";
 import ReactMarkdown from "react-markdown";
 import { evtTermMarkdown } from "keycloakify/login/lib/useDownloadTerms";
 import tos_en_url from "../terms/tos_en.md";
-import { useDownloadTerms } from "keycloakify/login";
 import { useRerenderOnStateChange } from "evt/hooks";
 
 type KcContext_Terms = Extract<KcContext, { pageId: "terms.ftl" }>;

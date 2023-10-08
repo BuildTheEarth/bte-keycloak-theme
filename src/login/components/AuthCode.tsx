@@ -2,10 +2,10 @@
 
 import { Group, Input } from "@mantine/core";
 import React, {
-  useRef,
+  forwardRef,
   useEffect,
   useImperativeHandle,
-  forwardRef,
+  useRef,
 } from "react";
 
 const allowedCharactersValues = ["alpha", "numeric", "alphanumeric"] as const;

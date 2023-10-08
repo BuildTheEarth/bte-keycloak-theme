@@ -1,18 +1,10 @@
-import {
-  Anchor,
-  Container,
-  Divider,
-  Text,
-  Title,
-  useMantineTheme,
-} from "@mantine/core";
+import { Anchor, Divider, Text, Title, useMantineTheme } from "@mantine/core";
 
 import type { I18n } from "../i18n";
 import { IconClock } from "@tabler/icons";
 import { KcContext } from "login/kcContext";
 import Layout from "../components/Layout";
 import { PageProps } from "keycloakify/login";
-import React from "react";
 
 export default function LoginPageExpired(
   props: PageProps<
