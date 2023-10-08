@@ -6,8 +6,10 @@ import { IconAlertOctagon, IconAlertTriangle } from "@tabler/icons";
 import { PageProps } from "keycloakify/login";
 import { KcContext } from "login/kcContext";
 
-export default function Error(props: PageProps<Extract<KcContext, { pageId: "error.ftl" }>, I18n>) {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+export default function Error(
+  props: PageProps<Extract<KcContext, { pageId: "error.ftl" }>, I18n>
+) {
+  const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
   const { message, client } = kcContext;
 

@@ -6,10 +6,10 @@ import Layout from "../components/Layout";
 import { PageProps } from "keycloakify/login";
 import { KcContext } from "login/kcContext";
 
-
-export default function Info(props: PageProps<Extract<KcContext, { pageId: "info.ftl" }>, I18n>) {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
-
+export default function Info(
+  props: PageProps<Extract<KcContext, { pageId: "info.ftl" }>, I18n>
+) {
+  const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
   const { msgStr, msg } = i18n;
 

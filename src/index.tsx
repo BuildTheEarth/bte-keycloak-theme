@@ -22,21 +22,19 @@ createRoot(document.getElementById("root")!).render(
     >
       <StrictMode>
         <Suspense>
-            {(()=>{
+          {(() => {
+            if (kcLoginThemeContext !== undefined) {
+              return <KcLoginThemeApp kcContext={kcLoginThemeContext} />;
+            }
 
-                if( kcLoginThemeContext !== undefined ){
-                    return <KcLoginThemeApp kcContext={kcLoginThemeContext} />;
-                }
+            if (kcAccountThemeContext !== undefined) {
+              return <KcAccountThemeApp kcContext={kcAccountThemeContext} />;
+            }
 
-                if( kcAccountThemeContext !== undefined ){
-                    return <KcAccountThemeApp kcContext={kcAccountThemeContext} />;
-                }
-
-                return <p>Error</p>;
-
-            })()}
+            return <p>Error</p>;
+          })()}
         </Suspense>
-    </StrictMode>
+      </StrictMode>
     </MantineProvider>
   </StrictMode>
 );

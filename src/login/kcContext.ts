@@ -13,7 +13,7 @@ export const { kcContext } = getKcContext<{
   - update-email
   - update-user-profile
   */
-  mockPageId: "register.ftl",
+  mockPageId: "login-reset-password.ftl",
   mockData: [
     {
       pageId: "login-idp-link-email.ftl",
