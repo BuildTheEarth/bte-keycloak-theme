@@ -18,6 +18,7 @@ import LoginOtp from "./pages/LoginOtp";
 import LoginPageExpired from "./pages/LoginPageExpired";
 import LoginResetPassword from "./pages/LoginResetPassword";
 import LoginVerifyEmail from "./pages/LoginVerifyEmail";
+import LogoutConfirm from "./pages/LogoutConfirm";
 import { NotificationsProvider } from "@mantine/notifications";
 import { PageProps } from "keycloakify/login";
 import { useI18n } from "./i18n";
@@ -151,6 +152,13 @@ export default function KcApp({ kcContext }: Props) {
                 case "login-idp-link-email.ftl":
                   return (
                     <LoginIdpLinkEmail
+                      {...{ kcContext, i18n, Template, classes }}
+                      doUseDefaultCss={true}
+                    />
+                  );
+                case "logout-confirm.ftl":
+                  return (
+                    <LogoutConfirm
                       {...{ kcContext, i18n, Template, classes }}
                       doUseDefaultCss={true}
                     />

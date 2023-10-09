@@ -61,7 +61,7 @@ export default function LoginResetPassword(
           required
           mt="md"
           name="username"
-          {...form.getInputProps("username")}
+          // {...form.getInputProps("username")}
         />
 
         <Button type="submit" fullWidth mt="xl">
