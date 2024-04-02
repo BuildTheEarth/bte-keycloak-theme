@@ -1,7 +1,7 @@
 {
   "name": "bte-theme",
   "homepage": "https://buildtheearth.net",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A custom theme for Keycloak based on Mantine",
   "repository": {
     "type": "git",
