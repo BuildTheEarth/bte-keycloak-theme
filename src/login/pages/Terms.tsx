@@ -9,14 +9,16 @@ import {
 } from "@mantine/core";
 import { PageProps, useDownloadTerms } from "keycloakify/login";
 
+import { IconClipboard } from "@tabler/icons";
 import { Evt } from "evt";
+import { useRerenderOnStateChange } from "evt/hooks";
+import { evtTermMarkdown } from "keycloakify/login/lib/useDownloadTerms";
+import Layout from "login/components/Layout";
+import { LayoutTitle } from "login/components/LayoutTitle";
+import ReactMarkdown from "react-markdown";
 import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
-import Layout from "login/components/Layout";
-import ReactMarkdown from "react-markdown";
-import { evtTermMarkdown } from "keycloakify/login/lib/useDownloadTerms";
 import tos_en_url from "../terms/tos_en.md";
-import { useRerenderOnStateChange } from "evt/hooks";
 
 type KcContext_Terms = Extract<KcContext, { pageId: "terms.ftl" }>;
 
@@ -61,70 +63,33 @@ export default function Terms(
   }
 
   return (
-    <Layout
-      {...{ kcContext, i18n, doUseDefaultCss, classes }}
-      centeredContent={false}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          flex: 1,
-          overflow: "hidden",
-        }}
-      >
-        <Title
-          py="md"
-          sx={(theme) => ({
-            boxShadow: `5px -1px 26px 17px ${
-              dark ? theme.colors.dark[7] : "white"
-            }`,
-            zIndex: 99,
-          })}
-        >
-          {msg("termsTitle")}
-        </Title>
-        <ScrollArea
-          sx={(theme) => ({
-            flex: 1,
-            height: "100%",
-          })}
-        >
-          {evtTermMarkdown.state && (
-            <TypographyStylesProvider>
-              <Box my="xl">
-                <ReactMarkdown>{evtTermMarkdown.state}</ReactMarkdown>
-              </Box>
-            </TypographyStylesProvider>
-          )}
-        </ScrollArea>
-        <form className="form-actions" action={url.loginAction} method="POST">
-          <Flex
-            justify={"flex-end"}
-            gap="sm"
-            pt="md"
-            sx={(theme) => ({
-              boxShadow: `5px -1px 26px 17px ${
-                dark ? theme.colors.dark[7] : "white"
-              }`,
-              zIndex: 99,
-            })}
+    <Layout {...{ kcContext, i18n, doUseDefaultCss, classes }}>
+      <LayoutTitle icon={IconClipboard} color="gray">
+        {msg("termsTitle")}
+      </LayoutTitle>
+      <ScrollArea h="50%">
+        {evtTermMarkdown.state && (
+          <TypographyStylesProvider>
+            <ReactMarkdown>{evtTermMarkdown.state}</ReactMarkdown>
+          </TypographyStylesProvider>
+        )}
+      </ScrollArea>
+      <form className="form-actions" action={url.loginAction} method="POST">
+        <Flex justify={"flex-end"} gap="sm" pt="md">
+          <Button
+            color={"red"}
+            variant="outline"
+            name="cancel"
+            id="kc-decline"
+            type="submit"
           >
-            <Button
-              color={"red"}
-              variant="outline"
-              name="cancel"
-              id="kc-decline"
-              type="submit"
-            >
-              {msgStr("doDecline")}
-            </Button>
-            <Button color={"green"} name="accept" id="kc-accept" type="submit">
-              {msgStr("doAccept")}
-            </Button>
-          </Flex>
-        </form>
-      </Box>
+            {msgStr("doDecline")}
+          </Button>
+          <Button color={"green"} name="accept" id="kc-accept" type="submit">
+            {msgStr("doAccept")}
+          </Button>
+        </Flex>
+      </form>
     </Layout>
   );
 }

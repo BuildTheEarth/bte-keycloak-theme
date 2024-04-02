@@ -1,11 +1,12 @@
 import { Anchor, Button, Container, Text, Title } from "@mantine/core";
 
-import AuthCode from "login/components/AuthCode";
-import type { I18n } from "../i18n";
-import { KcContext } from "login/kcContext";
-import Layout from "../components/Layout";
 import { PageProps } from "keycloakify/login";
+import AuthCode from "login/components/AuthCode";
+import { LayoutTitle } from "login/components/LayoutTitle";
+import { KcContext } from "login/kcContext";
 import { useState } from "react";
+import Layout from "../components/Layout";
+import type { I18n } from "../i18n";
 
 export default function LoginOtp(
   props: PageProps<Extract<KcContext, { pageId: "login-otp.ftl" }>, I18n>
@@ -26,39 +27,29 @@ export default function LoginOtp(
       hideLoggedIn={true}
       {...{ kcContext, i18n, doUseDefaultCss, classes }}
     >
-      <Container
-        sx={{
-          flex: 1,
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          height: "100%",
-        }}
-        size="xs"
-      >
-        <Text color={"dimmed"}>
-          {msg("attemptedUsernameGreeting", auth?.attemptedUsername)}{" "}
-          <Anchor href={url.loginRestartFlowUrl}>{msg("notYou")}</Anchor>
-        </Text>
-        <Title color={"light"} sx={{ fontWeight: 700 }} mb="md">
-          {msg("doLogIn")}
-        </Title>
+      <Text color={"dimmed"}>
+        {msg("attemptedUsernameGreeting", auth?.attemptedUsername)}
+        {", "}
+        <Anchor href={url.loginRestartFlowUrl}>{msg("notYou")}</Anchor>
+      </Text>
+      <LayoutTitle >
+        {msg("doLogIn")}
+      </LayoutTitle>
 
-        <Text mb="xs">{msg("loginOtpOneTime")}</Text>
-        <AuthCode onChange={handleOnChange} allowedCharacters={"numeric"} />
-        <form action={url.loginAction} method="post">
-          <input
-            name="otp"
-            autoComplete="off"
-            type="text"
-            value={result}
-            hidden
-          />
-          <Button fullWidth mt="xl" color={"white"} type="submit">
-            {msgStr("doLogIn")}
-          </Button>
-        </form>
-      </Container>
+      <Text mb="xs">{msg("loginOtpOneTime")}</Text>
+      <AuthCode onChange={handleOnChange} allowedCharacters={"numeric"} />
+      <form action={url.loginAction} method="post">
+        <input
+          name="otp"
+          autoComplete="off"
+          type="text"
+          value={result}
+          hidden
+        />
+        <Button fullWidth mt="xl" color={"white"} type="submit">
+          {msgStr("doLogIn")}
+        </Button>
+      </form>
     </Layout>
   );
 }

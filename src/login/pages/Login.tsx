@@ -24,10 +24,10 @@ import {
   IconBrandGoogle,
 } from "@tabler/icons";
 
+import { PageProps } from "keycloakify/login";
+import Layout from "login/components/Layout";
 import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
-import Layout from "login/components/Layout";
-import { PageProps } from "keycloakify/login";
 
 export default function Login(
   props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>
@@ -63,111 +63,109 @@ export default function Login(
 
   return (
     <Layout {...{ kcContext, i18n, doUseDefaultCss, classes }}>
-      <div>
-        <Title color={"light"} sx={{ fontWeight: 700 }}>
-          {msg("loginTitle")}
-        </Title>
+      <Title color={"light"} sx={{ fontWeight: 700 }}>
+        {msg("loginTitle")}
+      </Title>
 
-        <Text color="dimmed" size="sm" mt={5} mb="xl">
-          {msg("loginText")}
-        </Text>
+      <Text color="dimmed" size="sm" mt={5} mb="xl">
+        {msg("loginText")}
+      </Text>
 
-        <form action={url.loginAction} method="post">
-          {(() => {
-            const label = !realm.loginWithEmailAllowed
-              ? "username"
-              : realm.registrationEmailAsUsername
-              ? "email"
-              : "usernameOrEmail";
+      <form action={url.loginAction} method="post">
+        {(() => {
+          const label = !realm.loginWithEmailAllowed
+            ? "username"
+            : realm.registrationEmailAsUsername
+            ? "email"
+            : "usernameOrEmail";
 
-            const autoCompleteHelper: typeof label =
-              label === "usernameOrEmail" ? "username" : label;
+          const autoCompleteHelper: typeof label =
+            label === "usernameOrEmail" ? "username" : label;
 
-            return (
-              <>
-                <TextInput
-                  label={msg(label)}
-                  {...(usernameEditDisabled
-                    ? { disabled: true }
-                    : {
-                        autoFocus: true,
-                        autoComplete: "off",
-                      })}
-                  required
-                  name={autoCompleteHelper}
-                  id={autoCompleteHelper}
-                  defaultValue={login.username ?? ""}
-                />
-              </>
-            );
-          })()}
-          <PasswordInput
-            label={msg("password")}
-            required
-            mt="md"
-            name="password"
-            autoComplete="off"
-          />
-          <Anchor href={url.loginResetCredentialsUrl} size="sm">
-            {msg("doForgotPassword")}
-          </Anchor>
-
-          {realm.rememberMe && !usernameEditDisabled && (
-            <div className="checkbox">
-              <Checkbox
-                mt="md"
-                name="rememberMe"
-                label={msg("rememberMe")}
-                {...(login.rememberMe
-                  ? {
-                      checked: true,
-                    }
-                  : {})}
+          return (
+            <>
+              <TextInput
+                label={msg(label)}
+                {...(usernameEditDisabled
+                  ? { disabled: true }
+                  : {
+                      autoFocus: true,
+                      autoComplete: "off",
+                    })}
+                required
+                name={autoCompleteHelper}
+                id={autoCompleteHelper}
+                defaultValue={login.username ?? ""}
               />
-            </div>
-          )}
+            </>
+          );
+        })()}
+        <PasswordInput
+          label={msg("password")}
+          required
+          mt="md"
+          name="password"
+          autoComplete="off"
+        />
+        <Anchor href={url.loginResetCredentialsUrl} size="sm" mt="sm">
+          {msg("doForgotPassword")}
+        </Anchor>
 
-          <Button fullWidth mt="xl" color={"white"} type="submit">
-            {msgStr("doLogIn")}
-          </Button>
-          {realm.password &&
-            realm.registrationAllowed &&
-            !registrationDisabled && (
-              <Box mt="xl" sx={{ display: "flex", justifyContent: "center" }}>
-                <Text size={"sm"}>{msgStr("noAccount")}</Text>
-                <Anchor
-                  href={url.registrationUrl}
-                  color="white"
-                  size={"sm"}
-                  ml="xs"
-                >
-                  {msg("doRegister")}
-                </Anchor>
-              </Box>
-            )}
-        </form>
-
-        {realm.password && social.providers !== undefined && (
-          <Box>
-            <Divider my="sm" label={msgStr("or")} labelPosition="center" />
-            <SimpleGrid cols={social.providers.length >= 4 ? 2 : 1}>
-              {social.providers.map((p) => (
-                <Button
-                  variant="outline"
-                  color="gray"
-                  key={p.providerId}
-                  id={`social-${p.alias}`}
-                  component="a"
-                  href={p.loginUrl}
-                  leftIcon={getSocialIcon(p.alias)}
-                >
-                  {p.displayName}
-                </Button>
-              ))}
-            </SimpleGrid>
-          </Box>
+        {realm.rememberMe && !usernameEditDisabled && (
+          <div className="checkbox">
+            <Checkbox
+              mt="md"
+              name="rememberMe"
+              label={msg("rememberMe")}
+              {...(login.rememberMe
+                ? {
+                    checked: true,
+                  }
+                : {})}
+            />
+          </div>
         )}
-      </div>
+
+        <Button fullWidth mt="xl" type="submit">
+          {msgStr("doLogIn")}
+        </Button>
+        {realm.password &&
+          realm.registrationAllowed &&
+          !registrationDisabled && (
+            <Box mt="xl" sx={{ display: "flex", justifyContent: "center" }}>
+              <Text size={"sm"}>{msgStr("noAccount")}</Text>
+              <Anchor
+                href={url.registrationUrl}
+                color="white"
+                size={"sm"}
+                ml="xs"
+              >
+                {msg("doRegister")}
+              </Anchor>
+            </Box>
+          )}
+      </form>
+
+      {realm.password && social.providers !== undefined && (
+        <Box>
+          <Divider my="sm" label={msgStr("or")} labelPosition="center" />
+          <SimpleGrid cols={social.providers.length >= 4 ? 2 : 1}>
+            {social.providers.map((p) => (
+              <Button
+                variant="outline"
+                color="gray"
+                key={p.providerId}
+                id={`social-${p.alias}`}
+                component="a"
+                href={p.loginUrl}
+                leftIcon={getSocialIcon(p.alias)}
+              >
+                {p.displayName}
+              </Button>
+            ))}
+          </SimpleGrid>
+        </Box>
+      )}
     </Layout>
   );
 }

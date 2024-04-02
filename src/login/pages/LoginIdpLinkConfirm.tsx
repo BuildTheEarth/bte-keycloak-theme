@@ -1,10 +1,11 @@
-import { Box, Button, Container, Title, useMantineTheme } from "@mantine/core";
+import { Box, Button, Title, useMantineTheme } from "@mantine/core";
 
-import type { I18n } from "../i18n";
 import { IconAlertTriangle } from "@tabler/icons";
-import type { KcContext } from "../kcContext";
-import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
+import type { PageProps } from "keycloakify/login/pages/PageProps";
+import { LayoutTitle } from "login/components/LayoutTitle";
+import type { I18n } from "../i18n";
+import type { KcContext } from "../kcContext";
 
 export default function LoginIdpLinkConfirm(
   props: PageProps<
@@ -23,60 +24,37 @@ export default function LoginIdpLinkConfirm(
 
   const { msg } = i18n;
 
-  const theme = useMantineTheme();
-
   return (
     <Template
       {...{ kcContext, i18n, doUseDefaultCss, classes }}
       headerNode={msg("confirmLinkIdpTitle")}
     >
-      <Container
-        sx={{
-          flex: 1,
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          height: "100%",
-        }}
-        size="xs"
-      >
-        <Title
-          color={"light"}
-          sx={{
-            fontWeight: 700,
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-          }}
-          my="md"
-        >
-          <IconAlertTriangle color={theme.colors.orange[8]} size={40} />{" "}
-          {msg("confirmLinkIdpTitle")}
-        </Title>
-        <form id="kc-register-form" action={url.loginAction} method="post">
-          <Box mt={"xl"}>
-            <Button
-              fullWidth
-              type={"submit"}
-              name="submitAction"
-              value="updateProfile"
-            >
-              {msg("confirmLinkIdpReviewProfile")}
-            </Button>
+      <LayoutTitle icon={IconAlertTriangle} color="orange">
+        {msg("confirmLinkIdpTitle")}
+      </LayoutTitle>
+      <form id="kc-register-form" action={url.loginAction} method="post">
+        <Box mt={"xl"}>
+          <Button
+            fullWidth
+            type={"submit"}
+            name="submitAction"
+            value="updateProfile"
+          >
+            {msg("confirmLinkIdpReviewProfile")}
+          </Button>
 
-            <Button
-              fullWidth
-              type={"submit"}
-              name="submitAction"
-              value="linkAccount"
-              mt={"md"}
-              variant="outline"
-            >
-              {msg("confirmLinkIdpContinue", idpAlias)}
-            </Button>
-          </Box>
-        </form>
-      </Container>
+          <Button
+            fullWidth
+            type={"submit"}
+            name="submitAction"
+            value="linkAccount"
+            mt={"md"}
+            variant="outline"
+          >
+            {msg("confirmLinkIdpContinue", idpAlias)}
+          </Button>
+        </Box>
+      </form>
     </Template>
   );
 }

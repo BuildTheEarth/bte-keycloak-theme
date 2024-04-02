@@ -1,10 +1,11 @@
-import { Anchor, Divider, Text, Title, useMantineTheme } from "@mantine/core";
+import { Anchor, Divider, Text } from "@mantine/core";
 
-import type { I18n } from "../i18n";
 import { IconClock } from "@tabler/icons";
+import { PageProps } from "keycloakify/login";
+import { LayoutTitle } from "login/components/LayoutTitle";
 import { KcContext } from "login/kcContext";
 import Layout from "../components/Layout";
-import { PageProps } from "keycloakify/login";
+import type { I18n } from "../i18n";
 
 export default function LoginPageExpired(
   props: PageProps<
@@ -18,22 +19,11 @@ export default function LoginPageExpired(
 
   const { msg } = i18n;
 
-  const theme = useMantineTheme();
-
   return (
     <Layout {...{ kcContext, i18n, doUseDefaultCss, classes }}>
-      <Title
-        color={"light"}
-        sx={{
-          fontWeight: 700,
-          display: "flex",
-          alignItems: "center",
-          gap: "10px",
-        }}
-      >
-        <IconClock color={theme.colors.red[8]} size={30} />{" "}
+      <LayoutTitle icon={IconClock} color="red">
         {msg("pageExpiredTitle")}
-      </Title>
+      </LayoutTitle>
 
       <Text mt="xl">
         {msg("pageExpiredMsg1")}{" "}

@@ -9,17 +9,15 @@ export const { useI18n } = createUseI18n({
     loginText: "Please enter your details to continue!",
     or: "or",
     attemptedUsernameGreeting: "Hey, {0}",
-    notYou: "Not you?",
-  },
-  de: {
-    registerTitle: "Schön, dass du hier bist.",
-    registerText: "Bitte gebe deine Daten unten ein, um loszulegen!",
-    registerBackToLogin: "Du hast bereits einen Account? Hier einloggen.",
-    loginTitle: "Hey! Willkommen zurück.",
-    loginText: "Bitte gebe deine Daten unten ein, um fortzufahren!",
-    or: "oder",
-    attemptedUsernameGreeting: "Hey, {0}",
-    notYou: "Nicht du?",
+    notYou: "not you?",
+    emailLinkIdp1:
+      "An email with instructions to link your {0} account with your {1} account has been sent to you.",
+    loginIdpReviewProfileTitle: "Update Account",
+    usernameOrEmail: "Username or Email",
+    registerBackToLogin1: "Already have an account? ",
+    registerBackToLogin2: "Login here",
+    proceedWithAction: "Click here to proceed",
+    backToApplication: "Back to Application",
   },
 });
 

@@ -1,11 +1,11 @@
 import { Fragment, useEffect } from "react";
 
-import type { Attribute } from "keycloakify/login/kcContext/KcContext";
-import type { ClassKey } from "keycloakify/login/TemplateProps";
-import { I18n } from "../i18n";
 import { TextInput } from "@mantine/core";
-import { clsx } from "keycloakify/tools/clsx";
+import type { ClassKey } from "keycloakify/login/TemplateProps";
+import type { Attribute } from "keycloakify/login/kcContext/KcContext";
 import { useFormValidation } from "keycloakify/login/lib/useFormValidation";
+import { clsx } from "keycloakify/tools/clsx";
+import { I18n } from "../i18n";
 
 export type UserProfileFormFieldsProps = {
   kcContext: Parameters<typeof useFormValidation>[0]["kcContext"];
@@ -38,6 +38,7 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
   });
 
   useEffect(() => {
+    console.log("fs", { fieldStateByAttributeName, isFormSubmittable });
     onIsFormSubmittableValueChange(isFormSubmittable);
   }, [isFormSubmittable]);
 
@@ -89,15 +90,6 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
             {BeforeField && <BeforeField attribute={attribute} />}
 
             <div className={formGroupClassName}>
-              <div className={getClassName("kcLabelWrapperClass")}>
-                <label
-                  htmlFor={attribute.name}
-                  className={getClassName("kcLabelClass")}
-                >
-                  {advancedMsg(attribute.displayName ?? "")}
-                </label>
-                {attribute.required && <>*</>}
-              </div>
               <div className={getClassName("kcInputWrapperClass")}>
                 {(() => {
                   const { options } = attribute.validators;
@@ -132,39 +124,14 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                   }
 
                   return (
-                    /*<input
-                                            type={(() => {
-                                                switch (attribute.name) {
-                                                    case "password-confirm":
-                                                    case "password":
-                                                        return "password";
-                                                    default:
-                                                        return "text";
-                                                }
-                                            })()}
-                                            id={attribute.name}
-                                            name={attribute.name}
-                                            value={value}
-                                            onChange={event =>
-                                                formValidationDispatch({
-                                                    "action": "update value",
-                                                    "name": attribute.name,
-                                                    "newValue": event.target.value
-                                                })
-                                            }
-                                            onBlur={() =>
-                                                formValidationDispatch({
-                                                    "action": "focus lost",
-                                                    "name": attribute.name
-                                                })
-                                            }
-                                            className={getClassName("kcInputClass")}
-                                            aria-invalid={displayableErrors.length !== 0}
-                                            disabled={attribute.readOnly}
-                                            autoComplete={attribute.autocomplete}
-                                        />*/
                     <TextInput
                       name={attribute.name}
+                      label={advancedMsg(attribute.displayName ?? "")}
+                      required={attribute.required}
+                      className={getClassName("kcInputClass")}
+                      aria-invalid={displayableErrors.length !== 0}
+                      disabled={attribute.readOnly}
+                      autoComplete={attribute.autocomplete}
                       mb={"sm"}
                       type={(() => {
                         switch (attribute.name) {
@@ -190,11 +157,10 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                         })
                       }
                       error={
-                        displayableErrors.length !== 0
-                          ? displayableErrors.map(
-                              ({ errorMessage }) => errorMessage
-                            )
-                          : ""
+                        displayableErrors.length !== 0 &&
+                        displayableErrors.map(
+                          ({ errorMessage }) => errorMessage
+                        )
                       }
                     />
                   );

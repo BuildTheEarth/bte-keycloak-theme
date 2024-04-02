@@ -8,12 +8,12 @@ import {
   Title,
 } from "@mantine/core";
 
-import type { I18n } from "../i18n";
-import { KcContext } from "login/kcContext";
-import Layout from "../components/Layout";
-import { PageProps } from "keycloakify/login";
-import { useEffect } from "react";
 import { useForm } from "@mantine/form";
+import { PageProps } from "keycloakify/login";
+import { KcContext } from "login/kcContext";
+import { useEffect } from "react";
+import Layout from "../components/Layout";
+import type { I18n } from "../i18n";
 
 export default function Register(
   props: PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n>
@@ -143,9 +143,13 @@ export default function Register(
           </Button>
 
           <Box mt="xl" sx={{ display: "flex", justifyContent: "center" }}>
-            <Anchor href={url.loginUrl} color="white" size={"sm"}>
-              {msgStr("registerBackToLogin")}
-            </Anchor>
+            <Text size={"sm"}>
+              {msgStr("registerBackToLogin1")}
+              <Anchor href={url.loginUrl} color="white" inherit>
+                {msgStr("registerBackToLogin2")}
+              </Anchor>
+              .
+            </Text>
           </Box>
         </form>
       </div>

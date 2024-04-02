@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Anchor,
   BackgroundImage,
@@ -9,15 +10,16 @@ import {
   Paper,
   Text,
   createStyles,
+  useMantineTheme,
 } from "@mantine/core";
 import { IconAlertTriangle, IconCheck, IconX } from "@tabler/icons";
 
-import { I18n } from "../i18n";
-import type { KcContext } from "../kcContext";
-import { TemplateProps } from "../TemplateProps";
-import { ThemeSwitchButton } from "./ThemeSwitchButton";
 import { showNotification } from "@mantine/notifications";
 import { useEffect } from "react";
+import { TemplateProps } from "../TemplateProps";
+import { I18n } from "../i18n";
+import type { KcContext } from "../kcContext";
+import { ThemeSwitchButton } from "./ThemeSwitchButton";
 
 const useStyles = createStyles((theme) => ({
   loginSidebar: {
@@ -65,6 +67,10 @@ export default function Layout(props: TemplateProps<KcContext, I18n>) {
 
   let didInit = false;
 
+  const theme = useMantineTheme();
+
+  console.log(kcContext);
+
   useEffect(() => {
     if (!didInit) {
       didInit = true;
@@ -105,15 +111,13 @@ export default function Layout(props: TemplateProps<KcContext, I18n>) {
   const Wrapper = ({ children }: any) => {
     if (centeredContent)
       return (
-        <Container
+        <Box
           sx={{
-            flex: 1,
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
             height: "100%",
+            marginTop: `calc(${theme.spacing.xl}px * 5)`,
+            marginLeft: `calc(${theme.spacing.xl}px * 3)`,
+            marginRight: `calc(${theme.spacing.xl}px * 3)`,
           }}
-          size="xs"
           children={children}
         />
       );
@@ -137,11 +141,11 @@ export default function Layout(props: TemplateProps<KcContext, I18n>) {
                   msg("loginTitleHtml", realm.displayNameHtml).props.children
                 }
                 alt="Logo"
-                width="50px"
+                width="48px"
               />
 
               <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-                <Text size="xl" weight={400}>
+                <Text size="lg" weight={400} ff="Minecraft">
                   {realm.displayName}
                 </Text>
               </MediaQuery>
@@ -163,7 +167,7 @@ export default function Layout(props: TemplateProps<KcContext, I18n>) {
             {auth?.showTryAnotherWayLink && showAnotherWayIfPresent && (
               <form action={url.loginAction} method="post">
                 <input type="hidden" name="tryAnotherWay" value="on" />
-                <Button mt="md" variant="subtle" type={"submit"} fullWidth>
+                <Button mt="md" variant="outline" type={"submit"} fullWidth>
                   {msg("doTryAnotherWay")}
                 </Button>
               </form>
@@ -175,7 +179,7 @@ export default function Layout(props: TemplateProps<KcContext, I18n>) {
       <BackgroundImage
         src="https://cdn.buildtheearth.net/static/thumbnails/auth.webp"
         style={{ flex: 1 }}
-      ></BackgroundImage>
+      />
     </Box>
   );
 }

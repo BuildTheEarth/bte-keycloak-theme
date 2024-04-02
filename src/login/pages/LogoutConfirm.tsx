@@ -1,9 +1,11 @@
-import { Alert, Button, Text, Title } from "@mantine/core";
+import { Button, Text } from "@mantine/core";
 
-import type { I18n } from "../i18n";
+import { IconLogout } from "@tabler/icons";
+import { PageProps } from "keycloakify/login";
+import { LayoutTitle } from "login/components/LayoutTitle";
 import { KcContext } from "login/kcContext";
 import Layout from "../components/Layout";
-import { PageProps } from "keycloakify/login";
+import type { I18n } from "../i18n";
 
 export default function LogoutConfirm(
   props: PageProps<Extract<KcContext, { pageId: "logout-confirm.ftl" }>, I18n>
@@ -19,12 +21,10 @@ export default function LogoutConfirm(
       {...{ kcContext, i18n, doUseDefaultCss, classes }}
       displayMessage={false}
     >
-      <Title color={"light"} sx={{ fontWeight: 700 }}>
+      <LayoutTitle icon={IconLogout} color="yellow">
         {msg("logoutConfirmTitle")}
-      </Title>
-      <Text color="dimmed" size="sm" mt={5} mb="xl">
-        {msg("logoutConfirmHeader")}
-      </Text>
+      </LayoutTitle>
+      <Text mb="xl">{msg("logoutConfirmHeader")}</Text>
       <form action={url.loginAction} method="post">
         <input type="hidden" name="session_code" value={logoutConfirm.code} />
         <Button fullWidth mt="xl" color={"white"} type="submit">
@@ -32,7 +32,13 @@ export default function LogoutConfirm(
         </Button>
       </form>
       {!logoutConfirm.skipLink && client.baseUrl && (
-        <Button component="a" variant="subtle" href={client.baseUrl} mt="md">
+        <Button
+          component="a"
+          variant="outline"
+          href={client.baseUrl}
+          mt="md"
+          fullWidth
+        >
           {msg("backToApplication")}
         </Button>
       )}

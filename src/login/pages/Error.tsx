@@ -1,10 +1,11 @@
 import { Alert, Button, Title, useMantineTheme } from "@mantine/core";
 
-import type { I18n } from "../i18n";
 import { IconAlertTriangle } from "@tabler/icons";
+import { PageProps } from "keycloakify/login";
+import { LayoutTitle } from "login/components/LayoutTitle";
 import { KcContext } from "login/kcContext";
 import Layout from "../components/Layout";
-import { PageProps } from "keycloakify/login";
+import type { I18n } from "../i18n";
 
 export default function Error(
   props: PageProps<Extract<KcContext, { pageId: "error.ftl" }>, I18n>
@@ -22,25 +23,22 @@ export default function Error(
       {...{ kcContext, i18n, doUseDefaultCss, classes }}
       displayMessage={false}
     >
-      <Title
-        color={"light"}
-        sx={{
-          fontWeight: 700,
-          display: "flex",
-          alignItems: "center",
-          gap: "10px",
-        }}
-      >
-        <IconAlertTriangle color={theme.colors.red[8]} size={40} />{" "}
+      <LayoutTitle icon={IconAlertTriangle} color="red">
         {msg("errorTitle")}
-      </Title>
+      </LayoutTitle>
 
-      <Alert color="red" variant="outline" mt="md">
+      <Alert color="red" variant="light" mt="md">
         {message.summary}
       </Alert>
 
       {client !== undefined && client.baseUrl !== undefined && (
-        <Button variant="subtle" component="a" href={client.baseUrl} mt="md">
+        <Button
+          variant="outline"
+          component="a"
+          href={client.baseUrl}
+          mt="md"
+          fullWidth
+        >
           {msg("backToApplication")}
         </Button>
       )}

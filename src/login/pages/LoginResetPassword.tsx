@@ -1,10 +1,12 @@
 import { Button, Text, TextInput, Title } from "@mantine/core";
 
-import type { I18n } from "../i18n";
+import { useForm } from "@mantine/form";
+import { IconBulb } from "@tabler/icons";
+import { PageProps } from "keycloakify/login";
+import { LayoutTitle } from "login/components/LayoutTitle";
 import { KcContext } from "login/kcContext";
 import Layout from "../components/Layout";
-import { PageProps } from "keycloakify/login";
-import { useForm } from "@mantine/form";
+import type { I18n } from "../i18n";
 
 export default function LoginResetPassword(
   props: PageProps<
@@ -36,9 +38,9 @@ export default function LoginResetPassword(
 
   return (
     <Layout {...{ kcContext, i18n, doUseDefaultCss, classes }}>
-      <Title color={"light"} sx={{ fontWeight: 700 }}>
+      <LayoutTitle icon={IconBulb} color="lime">
         {msg("emailForgotTitle")}
-      </Title>
+      </LayoutTitle>
       <Text color="dimmed">{msg("emailInstruction")}</Text>
       <form
         action={url.loginAction}

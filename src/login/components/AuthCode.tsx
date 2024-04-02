@@ -139,7 +139,7 @@ const AuthCode = forwardRef<AuthCodeRef, AuthCodeProps>(
             (nextElementSibling as HTMLInputElement).focus();
           }
         } else {
-          e.target.value = "";
+          e.target.value = "-";
         }
       }
       sendResult();
@@ -237,7 +237,7 @@ const AuthCode = forwardRef<AuthCodeRef, AuthCodeProps>(
             },
           }}
           disabled={disabled}
-          placeholder={placeholder}
+          placeholder={placeholder || "x"}
         />
       );
     }

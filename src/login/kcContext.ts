@@ -12,78 +12,59 @@ export const { kcContext } = getKcContext<{
   - update-email
   - update-user-profile
   */
-  mockPageId: "logout-confirm.ftl",
+  mockPageId: "login-reset-password.ftl",
   mockData: [
     {
-      pageId: "login-idp-link-email.ftl",
+      pageId: "login-idp-link-email.ftl", // Done
       realm: {
         displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "BuildTheEarth",
       },
     },
     {
-      pageId: "idp-review-user-profile.ftl",
+      pageId: "login-idp-link-confirm.ftl", // Done
       realm: {
         displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "BuildTheEarth",
       },
     },
     {
-      pageId: "login-idp-link-confirm.ftl",
+      pageId: "idp-review-user-profile.ftl", // Done
       realm: {
         displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "BuildTheEarth",
       },
     },
     {
-      pageId: "login-page-expired.ftl",
+      pageId: "login-page-expired.ftl", // Done
       realm: {
         displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "BuildTheEarth",
       },
     },
     {
-      pageId: "login-verify-email.ftl",
+      pageId: "login-verify-email.ftl", // Done
       realm: {
         displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "BuildTheEarth",
       },
     },
     {
-      pageId: "login-reset-password.ftl",
+      pageId: "login-reset-password.ftl", // Done
       realm: {
         displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "BuildTheEarth",
       },
     },
     {
-      pageId: "terms.ftl",
+      pageId: "terms.ftl", // Done
       realm: {
         displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "BuildTheEarth",
       },
     },
     {
-      pageId: "login-otp.ftl",
-      realm: {
-        displayNameHtml: "/keycloak_static/resources/img/logo.png",
-        displayName: "BuildTheEarth",
-      },
-      auth: {
-        showTryAnotherWayLink: true,
-        showUsername: true,
-        attemptedUsername: "Nachwahl",
-      },
-    },
-    {
-      pageId: "error.ftl",
-      realm: {
-        displayNameHtml: "/keycloak_static/resources/img/logo.png",
-        displayName: "BuildTheEarth",
-      },
-    },
-    {
-      pageId: "webauthn-authenticate.ftl",
+      pageId: "login-otp.ftl", // Done
       realm: {
         displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "BuildTheEarth",
@@ -93,18 +74,16 @@ export const { kcContext } = getKcContext<{
         showUsername: true,
         attemptedUsername: "Nachwahl",
       },
-      authenticators: {
-        authenticators: [
-          {
-            label: "WebAuthn",
-            createdAt: "2021-03-01T00:00:00.000Z",
-            credentialId: "credentialId",
-          },
-        ],
+    },
+    {
+      pageId: "error.ftl", // Done
+      realm: {
+        displayNameHtml: "/keycloak_static/resources/img/logo.png",
+        displayName: "BuildTheEarth",
       },
     },
     {
-      pageId: "login.ftl",
+      pageId: "login.ftl", // Done
       realm: {
         displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "BuildTheEarth",
@@ -115,10 +94,6 @@ export const { kcContext } = getKcContext<{
             alias: "discord",
             displayName: "Discord",
           },
-          {
-            alias: "github",
-            displayName: "GitHub",
-          },
         ],
       },
       locale: {
@@ -126,21 +101,21 @@ export const { kcContext } = getKcContext<{
       },
     },
     {
-      pageId: "register.ftl",
+      pageId: "register.ftl", // Done
       realm: {
         displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "BuildTheEarth",
       },
     },
     {
-      pageId: "info.ftl",
+      pageId: "info.ftl", // Done
       realm: {
         displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "BuildTheEarth",
       },
     },
     {
-      pageId: "logout-confirm.ftl",
+      pageId: "logout-confirm.ftl", // Done
       realm: {
         displayNameHtml: "/keycloak_static/resources/img/logo.png",
         displayName: "BuildTheEarth",
