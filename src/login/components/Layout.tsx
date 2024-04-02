@@ -174,6 +174,19 @@ export default function Layout(props: TemplateProps<KcContext, I18n>) {
             )}
           </Wrapper>
         </Box>
+        <Group position="apart">
+          <Text fz="xs" c="dimmed">
+            {msg("copyright")}
+          </Text>
+          <Anchor
+            color="dimmed"
+            component="a"
+            fz="xs"
+            href="https://buildtheearth.net/contact"
+          >
+            Contact
+          </Anchor>
+        </Group>
       </Paper>
 
       <BackgroundImage

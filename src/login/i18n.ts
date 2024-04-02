@@ -18,6 +18,7 @@ export const { useI18n } = createUseI18n({
     registerBackToLogin2: "Login here",
     proceedWithAction: "Click here to proceed",
     backToApplication: "Back to Application",
+    copyright: "Copyright © 2024 BuildTheEarth",
   },
 });
 
