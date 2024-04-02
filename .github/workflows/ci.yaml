@@ -31,7 +31,7 @@ jobs:
     if: needs.check_if_version_upgraded.outputs.is_upgraded_version == 'true' && github.event_name == 'push'
     steps:
     - uses: actions/checkout@v2
-    - run: mv build_keycloak/target/*.jar bte-keycloak-theme-${{ needs.check_if_version_upgraded.outputs.to_version }}.jar
+    - run: mv build_keycloak/target/*.jar bte-keycloak-theme.jar
     - uses: softprops/action-gh-release@v1
       with:
         name: Release v${{ needs.check_if_version_upgraded.outputs.to_version }}
@@ -40,6 +40,6 @@ jobs:
         generate_release_notes: true
         draft: false
         files: |
-          bte-keycloak-theme-${{ needs.check_if_version_upgraded.outputs.to_version }}.jar
+          bte-keycloak-theme.jar
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

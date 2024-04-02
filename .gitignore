@@ -42,7 +42,9 @@ jspm_packages
 
 /dist
 
-/build_keycloak
+/build_keycloak/src*
+/build_keycloak/pom.xml
+
 /build
 public/keycloak-resources
 public/tmp_*
